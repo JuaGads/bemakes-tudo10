@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Be Makes Tudo 10 | Maquiagem a preço fixo em Campinas — loja física e online</title>
-  <meta name="description" content="Loja de maquiagem a preço fixo: tudo R$ 10,00. Compre nas lojas físicas em Campinas ou peça online.">
+  <title>Be Makes Tudo 10 | Maquiagem a R$ 10 em Campinas — 3 lojas físicas</title>
+  <meta name="description" content="Loja de maquiagem a preço fixo: tudo R$ 10,00. Visite uma das 3 lojas físicas em Campinas, no Ouro Verde e no Centro.">
   <link rel="canonical" href="https://juagads.github.io/bemakes-tudo10/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:url" content="https://juagads.github.io/bemakes-tudo10/">
   <meta property="og:title" content="Be Makes Tudo 10 — tudo R$ 10,00">
-  <meta property="og:description" content="Maquiagem, pincéis, cílios e acessórios a preço fixo. Loja física e online.">
+  <meta property="og:description" content="Maquiagem e acessórios a preço fixo. 3 lojas físicas em Campinas.">
   <meta name="theme-color" content="#E6247F">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23E6247F'/%3E%3Ctext x='32' y='45' font-family='Impact,Arial Black,sans-serif' font-size='36' text-anchor='middle' fill='%23FFE3EC'%3E10%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,7 +94,9 @@
     @media (min-width: 860px) { .nav-links { display: flex; } .nav-ig { display: none; } .nav-cta { display: inline-flex; } }
 
     /* Hero */
-    .hero { position: relative; overflow: hidden; color: #fff; padding: 6.25rem 0 3.5rem; background: radial-gradient(55% 55% at 0% 100%, #A80E57 0%, transparent 70%), linear-gradient(160deg, #E6247F 0%, #D61B73 55%, #B8105E 100%); }
+    .hero { position: relative; overflow: hidden; color: #fff; padding: 6.25rem 0 3.5rem; background: radial-gradient(55% 28% at 80% 62%, rgba(255, 143, 187, .45) 0%, transparent 70%), radial-gradient(55% 55% at 0% 100%, #8E0B4B 0%, transparent 70%), radial-gradient(40% 35% at 100% 0%, #F0448F 0%, transparent 70%), linear-gradient(160deg, #E6247F 0%, #D61B73 55%, #B0105A 100%); }
+    /* Pontilhado de brilho no alto do topo, some para baixo */
+    .hero::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255, 255, 255, .55) 1px, transparent 1.6px), radial-gradient(rgba(255, 255, 255, .35) 1px, transparent 1.4px); background-size: 26px 26px, 38px 38px; background-position: 0 0, 13px 19px; -webkit-mask-image: linear-gradient(180deg, #000, transparent 65%); mask-image: linear-gradient(180deg, #000, transparent 65%); opacity: .6; pointer-events: none; }
     .hero::after { content: "10"; position: absolute; right: -3%; bottom: -18%; font-family: var(--font-d); font-size: clamp(18rem, 46vw, 40rem); line-height: 1; color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, .13); pointer-events: none; animation: drift 12s ease-in-out infinite alternate; }
     .glow { position: absolute; width: 50vmax; height: 50vmax; right: -25vmax; top: -25vmax; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, .2), transparent 65%); pointer-events: none; animation: drift 9s ease-in-out infinite alternate; }
     @keyframes drift { to { transform: translate(-2%, -4%); } }
@@ -172,11 +174,8 @@
     .lead { color: var(--muted); max-width: 38rem; font-size: 1.05rem; }
     .center .lead { margin-inline: auto; }
 
-    /* Dois jeitos de comprar */
-    .ways { display: grid; gap: 1.25rem; }
-    @media (min-width: 860px) { .ways { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+    /* Faixa da loja online: secundária, a loja física vem primeiro */
     .way { position: relative; overflow: hidden; border-radius: var(--r-lg); padding: clamp(1.6rem, 4vw, 2.75rem); display: flex; flex-direction: column; gap: 1rem; }
-    .way-store { background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); }
     .way-online { background: linear-gradient(150deg, var(--plum-700), var(--plum)); color: #fff; }
     .way-online::after { content: ""; position: absolute; top: -30%; right: -20%; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(230, 36, 127, .55), transparent 65%); pointer-events: none; animation: breathe 6s ease-in-out infinite alternate; }
     @keyframes breathe { to { transform: scale(1.2); } }
@@ -188,53 +187,49 @@
     .way-online h3 { color: #fff; }
     .way p { color: var(--muted); }
     .way-online p { color: #F3D9E4; }
-    .way li { display: flex; align-items: center; gap: .7rem; font-weight: 500; margin-bottom: .45rem; }
-    .way li::before { content: ""; flex: none; width: .55rem; height: .55rem; border-radius: 50%; background: var(--pink); box-shadow: 0 0 0 4px rgba(230, 36, 127, .18); }
-    .way-online li::before { background: var(--pink-300); box-shadow: 0 0 0 4px rgba(247, 143, 187, .2); }
     .way .btns { margin-top: auto; padding-top: .75rem; display: flex; flex-wrap: wrap; gap: .7rem; }
     .way .btn { flex: 1 1 auto; }
     @media (min-width: 600px) { .way .btn { flex: 0 0 auto; } }
+    .way-text { display: grid; gap: .8rem; }
+    .online { padding-block: clamp(2.5rem, 6vw, 4rem); }
+    @media (min-width: 860px) { .way { flex-direction: row; align-items: center; justify-content: space-between; gap: 2.5rem; } .way .btns { flex: none; margin-top: 0; padding-top: 0; } }
 
     /* Categorias: carrossel de arrastar no celular, grade no desktop */
-    .products { background: #fff; }
+    .products { position: relative; overflow: hidden; background: #fff; }
+    /* Duas manchas rosadas nos cantos */
+    .products::before, .products::after { content: ""; position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(251, 192, 214, .6), transparent 68%); pointer-events: none; }
+    .products::before { width: 520px; height: 520px; left: -220px; top: -120px; }
+    .products::after { width: 620px; height: 620px; right: -260px; bottom: -260px; }
     .cats { display: flex; gap: .9rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 1.25rem; margin-inline: -1.25rem; padding: .5rem 1.25rem 1rem; scrollbar-width: none; }
     .cats::-webkit-scrollbar { display: none; }
-    .cat { flex: 0 0 44%; scroll-snap-align: start; display: block; text-decoration: none; text-align: center; background: var(--rose-50); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.6rem 1rem 1.3rem; }
+    .cat { flex: 0 0 62%; scroll-snap-align: start; display: block; overflow: hidden; text-decoration: none; text-align: center; background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding-bottom: 1.1rem; box-shadow: 0 14px 30px -22px rgba(158, 13, 81, .5); }
+    @media (min-width: 560px) { .cat { flex-basis: 34%; } }
+    .cat img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; margin-bottom: .9rem; transition: scale .4s var(--ease); }
+    .cat:hover img { scale: 1.05; }
     .cat:hover { border-color: var(--pink-300); box-shadow: var(--shadow); translate: 0 -4px; }
     .cat:active { scale: .96; }
-    @media (min-width: 700px) { .cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; overflow: visible; margin-inline: 0; padding: 0; } }
-    @media (min-width: 1024px) { .cats { grid-template-columns: repeat(6, 1fr); } }
-    .ring { width: 64px; height: 64px; margin: 0 auto .9rem; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--pink), var(--pink-600)); color: #fff; box-shadow: 0 12px 22px -12px rgba(201, 20, 104, .9); transition: scale .25s var(--ease), rotate .25s var(--ease); }
-    .cat:hover .ring { scale: 1.1; rotate: -8deg; }
-    .ring svg { width: 30px; height: 30px; }
+    @media (min-width: 860px) { .cats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; overflow: visible; margin-inline: 0; padding: 0; } }
     .cat b { display: block; }
     .cat span { display: inline-block; margin-top: .4rem; font-size: .78rem; font-weight: 700; color: var(--pink-700); background: var(--blush); border-radius: 999px; padding: .15rem .7rem; }
     .hint { margin-top: 1rem; text-align: center; font-size: .88rem; color: var(--muted); }
 
-    /* Como pedir: linha compacta no celular, cartões no desktop */
-    .how { background: linear-gradient(180deg, #FFE7EF, var(--rose-50)); }
-    .steps { display: grid; gap: 1rem; counter-reset: s; }
-    .step { display: grid; grid-template-columns: auto 1fr; column-gap: 1.1rem; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.25rem 1.4rem; }
-    .step::before { counter-increment: s; content: "0" counter(s); grid-row: span 2; font-family: var(--font-d); font-size: 3.2rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px var(--pink); }
-    .step h3 { font-size: 1.1rem; color: var(--plum); align-self: end; }
-    .step p { color: var(--muted); font-size: .95rem; align-self: start; }
-    @media (min-width: 860px) {
-      .steps { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-      .step { display: block; padding: 2rem 1.75rem; }
-      .step::before { display: block; margin-bottom: .75rem; font-size: 3.6rem; }
-      .step h3 { margin-bottom: .35rem; }
-    }
 
     /* Lojas */
-    .stores { background: #fff; }
+    .stores { position: relative; overflow: hidden; background: linear-gradient(180deg, #FFE1EB, var(--rose-50) 70%); }
+    /* Pontilhado rosa que some para baixo */
+    .stores::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(230, 36, 127, .18) 1.2px, transparent 1.8px); background-size: 22px 22px; -webkit-mask-image: radial-gradient(75% 60% at 50% 0%, #000, transparent 75%); mask-image: radial-gradient(75% 60% at 50% 0%, #000, transparent 75%); pointer-events: none; }
+    .stores .wrap, .products .wrap { position: relative; z-index: 1; }
+    .perks { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1.25rem; }
+    .perks li { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .95rem; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-weight: 700; font-size: .88rem; color: var(--plum); }
+    .perks li::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--pink); }
     .grid3 { display: grid; gap: 1.25rem; }
     @media (min-width: 900px) { .grid3 { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
-    .store { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--rose-50); }
+    .store { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-lg); border: 1px solid var(--line); background: #fff; }
     .store:hover { border-color: var(--pink-300); box-shadow: var(--shadow); translate: 0 -4px; }
     .store-top { position: relative; overflow: hidden; padding: 1.4rem 1.6rem; color: #fff; background: linear-gradient(135deg, var(--pink), var(--pink-600)); }
     .store-top::after { content: attr(data-n); position: absolute; right: .75rem; bottom: -1.7rem; font-family: var(--font-d); font-size: 7rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, .4); }
     .store-top small { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-    .store-top h3 { font-family: var(--font-d); font-weight: 400; font-size: 2.4rem; line-height: 1; }
+    .store-top h3 { font-family: var(--font-d); font-weight: 400; font-size: 2.1rem; line-height: 1; }
     .store-body { flex: 1; display: flex; flex-direction: column; gap: 1.1rem; padding: 1.4rem 1.6rem 1.6rem; }
     .addr { display: flex; gap: .6rem; }
     .addr svg { width: 1.25rem; height: 1.25rem; flex: none; margin-top: .15rem; color: var(--pink-600); }
@@ -254,7 +249,7 @@
     .insta .lead { color: #fff; margin: 0 auto 1.75rem; }
 
     /* Rodapé (folga embaixo para a barra do celular) */
-    footer { background: var(--plum); color: #E9CFDB; padding: 3.5rem 0 7rem; font-size: .93rem; }
+    footer { background: radial-gradient(70% 60% at 50% 0%, rgba(230, 36, 127, .28), transparent 70%), var(--plum); color: #E9CFDB; padding: 3.5rem 0 7rem; font-size: .93rem; }
     @media (min-width: 860px) { footer { padding: 4rem 0 2.5rem; } }
     .foot { display: grid; gap: 2.25rem; }
     @media (min-width: 800px) { .foot { grid-template-columns: 1.3fr 1.2fr 1fr .8fr; gap: 2.5rem; } }
@@ -298,10 +293,10 @@
     }
   </style>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Store","name":"Be Makes Tudo 10","description":"Loja de maquiagem a preço fixo: tudo R$ 10,00. Loja física e online em Campinas/SP.","url":"https://juagads.github.io/bemakes-tudo10/","priceRange":"R$ 10","sameAs":["https://www.instagram.com/bemakes_tudo10/"],"department":[
-    {"@type":"Store","name":"Be Makes Tudo 10 — Ouro Verde","telephone":"+55 19 99249-4551","address":{"@type":"PostalAddress","streetAddress":"Av. Ruy Rodrigues, 4452","addressLocality":"Campinas","addressRegion":"SP","addressCountry":"BR"}},
+  {"@context":"https://schema.org","@type":"Store","name":"Be Makes Tudo 10","description":"Loja de maquiagem a preço fixo: tudo R$ 10,00. Três lojas físicas em Campinas/SP.","url":"https://juagads.github.io/bemakes-tudo10/","priceRange":"R$ 10","sameAs":["https://www.instagram.com/bemakes_tudo10/"],"department":[
+    {"@type":"Store","name":"Be Makes Tudo 10 — Ouro Verde (Av. Ruy Rodrigues)","telephone":"+55 19 99249-4551","address":{"@type":"PostalAddress","streetAddress":"Av. Ruy Rodrigues, 4452","addressLocality":"Campinas","addressRegion":"SP","addressCountry":"BR"}},
     {"@type":"Store","name":"Be Makes Tudo 10 — Centro","telephone":"+55 19 98975-7098","address":{"@type":"PostalAddress","streetAddress":"Av. Dr. Morais Salles, 416","addressLocality":"Campinas","addressRegion":"SP","addressCountry":"BR"}},
-    {"@type":"Store","name":"Be Makes Tudo 10 — Ibrantina Cardona","address":{"@type":"PostalAddress","streetAddress":"Rua Ibrantina Cardona, 741","addressLocality":"Campinas","addressRegion":"SP","addressCountry":"BR"}}
+    {"@type":"Store","name":"Be Makes Tudo 10 — Ouro Verde (Rua Ibrantina Cardona)","address":{"@type":"PostalAddress","streetAddress":"Rua Ibrantina Cardona, 741 - Ouro Verde","addressLocality":"Campinas","addressRegion":"SP","postalCode":"13054-430","addressCountry":"BR"},"geo":{"@type":"GeoCoordinates","latitude":-22.982342,"longitude":-47.12118}}
   ]}
   </script>
 </head>
@@ -317,11 +312,6 @@
     <symbol id="i-bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></g></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-lip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="13" width="8" height="8" rx="1"/><path d="M9.5 13v-3h5v3"/><path d="M10.5 10V5.5l3-2V10"/></g></symbol>
-    <symbol id="i-lash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 10c3.5 4.5 14.5 4.5 18 0"/><path d="M5.2 12.5 3.8 14.5M8.5 14.2l-.8 2.3M12 14.8v2.5M15.5 14.2l.8 2.3M18.8 12.5l1.4 2"/></g></symbol>
-    <symbol id="i-brush" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-7"/><rect x="10" y="10" width="4" height="4" rx=".5"/><path d="M10 10c-.6-3.5.4-7 2-7s2.6 3.5 2 7z"/></g></symbol>
-    <symbol id="i-pal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8" cy="10" r="1.6"/><circle cx="12" cy="10" r="1.6"/><circle cx="16" cy="10" r="1.6"/><path d="M7 15.5h10"/></g></symbol>
-    <symbol id="i-comp" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3.5v-1"/></g></symbol>
-    <symbol id="i-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1z"/><path d="M14 7l3 3"/></g></symbol>
   </svg>
 
   <nav class="nav" aria-label="Principal">
@@ -329,13 +319,12 @@
       <!-- Trocar por <img> quando o arquivo da logo chegar -->
       <a class="brand" href="#topo">Be Makes <span>Tudo 10</span></a>
       <div class="nav-links">
-        <a href="#comprar">Onde comprar</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#como-pedir">Como pedir</a>
         <a href="#lojas">Lojas</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#online">Peça online</a>
       </div>
       <a class="nav-ig" href="https://www.instagram.com/bemakes_tudo10/" target="_blank" rel="noopener" aria-label="Instagram da Be Makes"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
-      <a class="btn btn-pink btn-sm nav-cta" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir agora</a>
+      <a class="btn btn-pink btn-sm nav-cta" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
     </div>
   </nav>
 
@@ -348,10 +337,10 @@
           <span class="serif up" style="--d:.06s">Sua make completa,</span>
           <span class="big up" style="--d:.12s">Tudo por <em>R$&nbsp;10</em></span>
         </h1>
-        <p class="sub up" style="--d:.22s">Batom, cílios, pincéis, sombras e muito mais com preço único. Compre nas nossas lojas físicas ou peça online.</p>
+        <p class="sub up" style="--d:.22s">Blush, máscara de cílios, corretivo, acessórios e muito mais com preço único. Visite uma das nossas 3 lojas em Campinas e leve na hora.</p>
         <div class="hero-cta up" style="--d:.3s">
-          <a class="btn btn-white" href="#comprar"><svg aria-hidden="true"><use href="#i-bag"/></svg>Comprar online</a>
-          <a class="btn btn-glass" href="#lojas"><svg aria-hidden="true"><use href="#i-pin"/></svg>Ver lojas</a>
+          <a class="btn btn-white" href="#lojas"><svg aria-hidden="true"><use href="#i-pin"/></svg>Ver lojas</a>
+          <a class="btn btn-glass" href="#online"><svg aria-hidden="true"><use href="#i-bag"/></svg>Pedir online</a>
         </div>
       </div>
 
@@ -386,7 +375,7 @@
           <svg viewBox="0 0 200 200"><defs><path id="ring" d="M100 100m-77 0a77 77 0 1 1 154 0a77 77 0 1 1-154 0"/></defs><text font-family="Bebas Neue, Impact, sans-serif" font-size="20" letter-spacing="2" fill="currentColor"><textPath href="#ring" textLength="476">PREÇO FIXO • TUDO R$ 10 • PREÇO FIXO • TUDO R$ 10 •</textPath></text></svg>
           <b>R$<br>10</b>
         </div>
-        <span class="chip chip-1"><svg><use href="#i-store"/></svg>Loja física + online</span>
+        <span class="chip chip-1"><svg><use href="#i-store"/></svg>3 lojas em Campinas</span>
       </div>
 
       <div class="stats up" style="--d:.4s">
@@ -399,49 +388,57 @@
 
   <div class="band" aria-hidden="true">
     <div class="row"><div class="track">
-      <span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>Loja física e online</span><i>✦</i><span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>Loja física e online</span><i>✦</i>
-      <span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>Loja física e online</span><i>✦</i><span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>Loja física e online</span><i>✦</i>
+      <span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>3 lojas em Campinas</span><i>✦</i><span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>3 lojas em Campinas</span><i>✦</i>
+      <span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>3 lojas em Campinas</span><i>✦</i><span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>3 lojas em Campinas</span><i>✦</i>
     </div></div>
     <div class="row rev"><div class="track">
-      <span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i><span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i>
-      <span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i><span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i>
+      <span>Blush</span><i>✦</i><span>Máscara de cílios</span><i>✦</i><span>Corretivo</span><i>✦</i><span>Brincos</span><i>✦</i><span>E muito mais</span><i>✦</i><span>Blush</span><i>✦</i><span>Máscara de cílios</span><i>✦</i><span>Corretivo</span><i>✦</i><span>Brincos</span><i>✦</i><span>E muito mais</span><i>✦</i>
+      <span>Blush</span><i>✦</i><span>Máscara de cílios</span><i>✦</i><span>Corretivo</span><i>✦</i><span>Brincos</span><i>✦</i><span>E muito mais</span><i>✦</i><span>Blush</span><i>✦</i><span>Máscara de cílios</span><i>✦</i><span>Corretivo</span><i>✦</i><span>Brincos</span><i>✦</i><span>E muito mais</span><i>✦</i>
     </div></div>
   </div>
 
-  <section id="comprar">
+  <section class="stores" id="lojas">
     <div class="wrap">
       <div class="head center reveal">
-        <span class="kicker">Onde comprar</span>
-        <h2 class="h2">Dois jeitos de <em>comprar</em></h2>
-        <p class="lead">Na loja ou no celular, o preço é o mesmo: R$ 10,00.</p>
+        <span class="kicker">Lojas físicas</span>
+        <h2 class="h2">Venha nos <em>visitar</em></h2>
+        <p class="lead">Três lojas em Campinas, duas no Ouro Verde e uma no Centro, com tudo a R$ 10,00.</p>
+        <ul class="perks">
+          <li>Veja de perto</li>
+          <li>Leve na hora</li>
+          <li>Tudo a R$ 10,00</li>
+        </ul>
       </div>
-      <div class="ways">
-        <article class="way way-store reveal" data-r="l">
-          <span class="ico"><svg aria-hidden="true"><use href="#i-store"/></svg></span>
-          <h3>Na loja física</h3>
-          <p>Veja de perto, escolha com calma e leve na hora.</p>
-          <ul>
-            <li>3 endereços em Campinas</li>
-            <li>Leve seus produtos na hora</li>
-            <li>Tudo a R$ 10,00</li>
-          </ul>
-          <div class="btns">
-            <a class="btn btn-pink" href="#lojas">Encontrar uma loja<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <div class="grid3">
+        <article class="store reveal">
+          <div class="store-top" data-n="01"><small>Loja 1 · Ouro Verde</small><h3>Av. Ruy Rodrigues</h3></div>
+          <div class="store-body">
+            <p class="addr"><svg aria-hidden="true"><use href="#i-pin"/></svg>Av. Ruy Rodrigues, 4452<br>Ouro Verde, Campinas/SP</p>
+            <div class="btns">
+              <a class="btn btn-pink" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Ruy%20Rodrigues%2C%204452%2C%20Campinas%20SP" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar</a>
+              <a class="btn btn-outline" href="https://wa.me/5519992494551?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+            </div>
           </div>
         </article>
-        <article class="way way-online reveal" data-r="r">
-          <span class="ico"><svg aria-hidden="true"><use href="#i-bag"/></svg></span>
-          <h3>Na loja online</h3>
-          <p>Monte seu pedido pelo site ou pelo WhatsApp, de onde estiver.</p>
-          <ul>
-            <li>Peça pelo site ou WhatsApp</li>
-            <li>Retire na loja mais perto</li>
-            <li>Mesmo preço fixo: R$ 10,00</li>
-          </ul>
-          <div class="btns">
-            <a class="btn btn-white" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido%20online." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir pelo WhatsApp</a>
-            <!-- Atenção: em 2026-11-25 este endereço mostrava "loja temporariamente fora de serviço" -->
-            <a class="btn btn-glass" href="https://bemakestudo103.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Acessar loja virtual<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <article class="store reveal" style="--i:1">
+          <div class="store-top" data-n="02"><small>Loja 2 · Centro</small><h3>Av. Morais Salles</h3></div>
+          <div class="store-body">
+            <p class="addr"><svg aria-hidden="true"><use href="#i-pin"/></svg>Av. Dr. Morais Salles, 416<br>Centro, Campinas/SP</p>
+            <div class="btns">
+              <a class="btn btn-pink" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Dr.%20Morais%20Salles%2C%20416%2C%20Campinas%20SP" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar</a>
+              <a class="btn btn-outline" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+            </div>
+          </div>
+        </article>
+        <!-- TODO: falta o WhatsApp da Loja 3; por enquanto o botão abre o Direct -->
+        <article class="store reveal" style="--i:2">
+          <div class="store-top" data-n="03"><small>Loja 3 · Ouro Verde</small><h3>R. Ibrantina Cardona</h3></div>
+          <div class="store-body">
+            <p class="addr"><svg aria-hidden="true"><use href="#i-pin"/></svg>Rua Ibrantina Cardona, 741<br>Ouro Verde, Campinas/SP</p>
+            <div class="btns">
+              <a class="btn btn-pink" href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Ibrantina%20Cardona%2C%20741%2C%20Ouro%20Verde%2C%20Campinas%20SP%2C%2013054-430" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar</a>
+              <a class="btn btn-outline" href="https://ig.me/m/bemakes_tudo10" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg>Direct</a>
+            </div>
           </div>
         </article>
       </div>
@@ -453,76 +450,34 @@
       <div class="head center reveal">
         <span class="kicker">Produtos</span>
         <h2 class="h2">O que você <em>encontra</em></h2>
-        <p class="lead">Tudo isso, e muito mais, pelo mesmo preço.</p>
+        <p class="lead">Alguns produtos das nossas prateleiras. Todos pelo mesmo preço.</p>
       </div>
-      <!-- Cada categoria abre o WhatsApp principal com a mensagem já escrita -->
+      <!-- Fotos do Instagram da loja (posts de 30/10 e 04/11/2026). Rótulos: só o que dá para ler na embalagem. -->
       <div class="cats">
-        <a class="cat reveal" data-r="z" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20batom." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-lip"/></svg></div><b>Batom</b><span>R$ 10,00</span></a>
-        <a class="cat reveal" data-r="z" style="--i:1" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20c%C3%ADlios." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-lash"/></svg></div><b>Cílios</b><span>R$ 10,00</span></a>
-        <a class="cat reveal" data-r="z" style="--i:2" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20pinc%C3%A9is." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-brush"/></svg></div><b>Pincéis</b><span>R$ 10,00</span></a>
-        <a class="cat reveal" data-r="z" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20sombras." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-pal"/></svg></div><b>Sombras</b><span>R$ 10,00</span></a>
-        <a class="cat reveal" data-r="z" style="--i:1" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20p%C3%B3." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-comp"/></svg></div><b>Pó</b><span>R$ 10,00</span></a>
-        <a class="cat reveal" data-r="z" style="--i:2" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20delineador." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-pen"/></svg></div><b>Delineador</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" href="https://www.instagram.com/bemakes_tudo10/p/DfH1Mi0RMBn/" target="_blank" rel="noopener"><img src="img/blush.webp" alt="Mão segurando duas paletas de blush em frente às prateleiras da loja" width="480" height="640" loading="lazy" decoding="async"><b>Blush</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" style="--i:1" href="https://www.instagram.com/bemakes_tudo10/p/DfH1D5gxsez/" target="_blank" rel="noopener"><img src="img/mascara-cilios.webp" alt="Mão segurando duas máscaras de cílios em frente às prateleiras da loja" width="480" height="640" loading="lazy" decoding="async"><b>Máscara de cílios</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" style="--i:2" href="https://www.instagram.com/bemakes_tudo10/reel/DfUiFMDR4Mb/" target="_blank" rel="noopener"><img src="img/corretivo-liquido.webp" alt="Expositor de corretivo líquido na loja" width="360" height="480" loading="lazy" decoding="async"><b>Corretivo líquido</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" href="https://www.instagram.com/bemakes_tudo10/p/DfH0vhAkal4/" target="_blank" rel="noopener"><img src="img/corretivo-matte.webp" alt="Mão segurando dois corretivos líquidos matte em frente às prateleiras da loja" width="480" height="640" loading="lazy" decoding="async"><b>Corretivo matte</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" style="--i:1" href="https://www.instagram.com/bemakes_tudo10/p/DfH0Q6rRV3B/" target="_blank" rel="noopener"><img src="img/brincos.webp" alt="Mão segurando cartelas de brincos dourados em frente às prateleiras da loja" width="480" height="640" loading="lazy" decoding="async"><b>Brincos</b><span>R$ 10,00</span></a>
       </div>
-      <p class="hint">Toque em uma categoria para pedir pelo WhatsApp.</p>
+      <p class="hint">Fotos do nosso Instagram. Toque para ver o post.</p>
     </div>
   </section>
 
-  <section class="how" id="como-pedir">
+  <section class="online" id="online">
     <div class="wrap">
-      <div class="head center reveal">
-        <span class="kicker">Pedido online</span>
-        <h2 class="h2">Como <em>pedir</em></h2>
-        <p class="lead">Três passos e a sua make está garantida.</p>
-      </div>
-      <div class="steps">
-        <div class="step reveal"><h3>Escolha seus produtos</h3><p>No site ou direto com a loja pelo WhatsApp.</p></div>
-        <div class="step reveal" style="--i:1"><h3>Confirme o pedido</h3><p>A equipe confirma os itens e combina o pagamento com você.</p></div>
-        <div class="step reveal" style="--i:2"><h3>Retire na loja</h3><p>Busque seu pedido na loja mais perto de você.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="stores" id="lojas">
-    <div class="wrap">
-      <div class="head center reveal">
-        <span class="kicker">Lojas físicas</span>
-        <h2 class="h2">Venha nos <em>visitar</em></h2>
-        <p class="lead">Três endereços em Campinas com tudo a R$ 10,00.</p>
-      </div>
-      <div class="grid3">
-        <article class="store reveal">
-          <div class="store-top" data-n="01"><small>Loja 1</small><h3>Ouro Verde</h3></div>
-          <div class="store-body">
-            <p class="addr"><svg aria-hidden="true"><use href="#i-pin"/></svg>Av. Ruy Rodrigues, 4452<br>Ouro Verde, Campinas/SP</p>
-            <div class="btns">
-              <a class="btn btn-dark" href="https://wa.me/5519992494551?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
-              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Ruy%20Rodrigues%2C%204452%2C%20Campinas%20SP" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar</a>
-            </div>
-          </div>
-        </article>
-        <article class="store reveal" style="--i:1">
-          <div class="store-top" data-n="02"><small>Loja 2</small><h3>Centro</h3></div>
-          <div class="store-body">
-            <p class="addr"><svg aria-hidden="true"><use href="#i-pin"/></svg>Av. Dr. Morais Salles, 416<br>Centro, Campinas/SP</p>
-            <div class="btns">
-              <a class="btn btn-dark" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
-              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Dr.%20Morais%20Salles%2C%20416%2C%20Campinas%20SP" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar</a>
-            </div>
-          </div>
-        </article>
-        <article class="store reveal" style="--i:2">
-          <!-- TODO: confirmar bairro/cidade e WhatsApp da Loja 3 (só a rua aparece na bio do Instagram) -->
-          <div class="store-top" data-n="03"><small>Loja 3</small><h3>Ibrantina Cardona</h3></div>
-          <div class="store-body">
-            <p class="addr"><svg aria-hidden="true"><use href="#i-pin"/></svg>Rua Ibrantina Cardona, 741<br>Campinas/SP</p>
-            <div class="btns">
-              <a class="btn btn-dark" href="https://ig.me/m/bemakes_tudo10" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg>Direct</a>
-              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Ibrantina%20Cardona%2C%20741%2C%20Campinas%20SP" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar</a>
-            </div>
-          </div>
-        </article>
-      </div>
+      <article class="way way-online reveal" data-r="z">
+        <div class="way-text">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-bag"/></svg></span>
+          <h3>Não dá para vir até a loja?</h3>
+          <p>Monte seu pedido pelo site ou pelo WhatsApp e retire na loja mais perto.</p>
+        </div>
+        <div class="btns">
+          <a class="btn btn-white" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido%20online." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir pelo WhatsApp</a>
+          <!-- Atenção: em 2026-11-25 este endereço mostrava "loja temporariamente fora de serviço" -->
+          <a class="btn btn-glass" href="https://bemakestudo103.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Acessar loja virtual<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -541,14 +496,14 @@
       <div class="foot">
         <div>
           <p class="brand-f">Be Makes<br>Tudo 10</p>
-          <p>Loja de maquiagem a preço fixo.<br>Física e online, em Campinas/SP.</p>
+          <p>Loja de maquiagem a preço fixo.<br>3 lojas físicas em Campinas/SP.</p>
         </div>
         <div>
           <h4>Lojas físicas</h4>
           <ul>
             <li>Av. Ruy Rodrigues, 4452 · Ouro Verde</li>
             <li>Av. Dr. Morais Salles, 416 · Centro</li>
-            <li>Rua Ibrantina Cardona, 741</li>
+            <li>Rua Ibrantina Cardona, 741 · Ouro Verde</li>
           </ul>
         </div>
         <div>
@@ -573,13 +528,13 @@
 
   <!-- Barra de atalhos (só celular) -->
   <nav class="tabbar" aria-label="Atalhos">
-    <a class="tab" href="#comprar"><svg aria-hidden="true"><use href="#i-bag"/></svg>Comprar</a>
-    <a class="tab" href="#produtos"><svg aria-hidden="true"><use href="#i-lip"/></svg>Produtos</a>
     <a class="tab" href="#lojas"><svg aria-hidden="true"><use href="#i-pin"/></svg>Lojas</a>
-    <a class="tab tab-wa" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+    <a class="tab" href="#produtos"><svg aria-hidden="true"><use href="#i-lip"/></svg>Produtos</a>
+    <a class="tab" href="#online"><svg aria-hidden="true"><use href="#i-bag"/></svg>Online</a>
+    <a class="tab tab-wa" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
   </nav>
 
-  <a class="fab" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener" aria-label="Pedir pelo WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+  <a class="fab" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
   <script>
     // Revela os blocos ao rolar; sem JS o conteúdo fica visível (classe .js).
