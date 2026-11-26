@@ -110,7 +110,7 @@
     /* Entrada em cascata: cada bloco sobe com um atraso (--d) */
     .up { animation: rise .7s var(--ease) both; animation-delay: var(--d, 0s); }
     @keyframes rise { from { opacity: 0; transform: translateY(26px); } }
-    .eyebrow { display: inline-flex; align-items: center; gap: .55rem; background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: .4rem 1rem; font-size: clamp(.66rem, 2.9vw, .78rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .eyebrow { display: inline-flex; align-items: center; gap: .55rem; background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: .4rem 1rem; font-size: clamp(.6rem, 2.9vw, .78rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
     .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--blush); animation: blink 1.8s ease-in-out infinite; }
     @keyframes blink { 50% { opacity: .3; } }
     h1 { margin: 1.1rem 0 1rem; font-weight: 400; }
@@ -123,6 +123,12 @@
     .hero-cta .btn { flex: 1 1 auto; padding-inline: .8rem; font-size: .95rem; }
     @media (min-width: 360px) { .hero-cta { flex-wrap: nowrap; } } /* lado a lado no celular; abaixo de 360px empilha */
     @media (min-width: 600px) { .hero-cta .btn { flex: 0 0 auto; padding-inline: 1.6rem; font-size: 1rem; } }
+    /* Em uma coluna (celular e tablet) o topo fica centralizado, como a foto e as outras seções */
+    @media (max-width: 959px) {
+      .hero-text { text-align: center; }
+      .sub { margin-inline: auto; }
+      .hero-cta { justify-content: center; }
+    }
     /* Numa coluna ocupa a largura toda, alinhado com a foto centralizada; em duas colunas fica sob o texto */
     .stats { grid-area: stats; display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; }
     @media (min-width: 960px) { .stats { align-self: start; max-width: 20rem; } }
@@ -191,6 +197,8 @@
     .way-text { display: grid; gap: .8rem; }
     .online { padding-block: clamp(2.5rem, 6vw, 4rem); }
     @media (min-width: 860px) { .way { flex-direction: row; align-items: center; justify-content: space-between; gap: 2.5rem; } .way .btns { flex: none; margin-top: 0; padding-top: 0; } }
+    /* Empilhada (celular e tablet): centralizada */
+    @media (max-width: 859px) { .way { text-align: center; } .way .ico { justify-self: center; } .way .btns { justify-content: center; } }
 
     /* Categorias: carrossel de arrastar no celular, grade no desktop */
     /* Embaixo, folga igual à da faixa online, para não abrir um vão entre as duas */
@@ -255,6 +263,7 @@
     @media (min-width: 860px) { footer { padding: 4rem 0 2.5rem; } }
     .foot { display: grid; gap: 2.25rem; }
     @media (min-width: 800px) { .foot { grid-template-columns: 1.3fr 1.2fr 1fr .8fr; gap: 2.5rem; } }
+    @media (max-width: 799px) { .foot { text-align: center; } }
     .brand-f { font-family: var(--font-d); font-size: 2.6rem; line-height: .95; color: var(--blush); margin-bottom: .75rem; }
     .foot h4 { color: #fff; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .9rem; }
     /* Mesmo espaço entre linhas com ou sem link; o link usa a folga da linha como área de toque */
