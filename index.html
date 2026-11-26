@@ -2,12 +2,17 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Be Makes Tudo 10 | Maquiagem a preço fixo em Campinas — loja física e online</title>
   <meta name="description" content="Loja de maquiagem a preço fixo: tudo R$ 10,00. Compre nas lojas físicas em Campinas ou peça online e receba em casa.">
+  <link rel="canonical" href="https://juagads.github.io/bemakes-tudo10/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://juagads.github.io/bemakes-tudo10/">
   <meta property="og:title" content="Be Makes Tudo 10 — tudo R$ 10,00">
   <meta property="og:description" content="Maquiagem, pincéis, cílios e acessórios a preço fixo. Loja física e online.">
   <meta name="theme-color" content="#E6247F">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23E6247F'/%3E%3Ctext x='32' y='45' font-family='Impact,Arial Black,sans-serif' font-size='36' text-anchor='middle' fill='%23FFE3EC'%3E10%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
@@ -31,23 +36,31 @@
       --r-lg: 28px;
       --r-md: 20px;
       --shadow: 0 24px 50px -24px rgba(158, 13, 81, .4);
+      --ease: cubic-bezier(.2, .8, .2, 1);
       --font-d: "Bebas Neue", Impact, sans-serif;
       --font-b: "DM Sans", system-ui, sans-serif;
       --font-s: "Instrument Serif", Georgia, serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-b); color: var(--ink); background: var(--rose-50); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font-b); color: var(--ink); background: var(--rose-50); line-height: 1.6; overflow-x: clip; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
     a { color: inherit; }
     a:focus-visible { outline: 3px solid var(--plum); outline-offset: 3px; border-radius: 6px; }
     .hero a:focus-visible, .insta a:focus-visible, footer a:focus-visible, .way-online a:focus-visible { outline-color: #fff; }
     ul { list-style: none; }
     .wrap { width: min(1160px, 100% - 2.5rem); margin-inline: auto; }
-    section { padding: clamp(4rem, 9vw, 6.5rem) 0; scroll-margin-top: 4.5rem; }
+    section { padding: clamp(3.5rem, 9vw, 6.5rem) 0; scroll-margin-top: 1rem; }
+    @media (min-width: 860px) { section { scroll-margin-top: 4.5rem; } }
+
+    /* Barra de progresso da rolagem (só onde o navegador suporta) */
+    .progress { position: fixed; inset: 0 0 auto; height: 3px; z-index: 70; background: linear-gradient(90deg, var(--pink-300), var(--pink-700)); transform-origin: 0 50%; transform: scaleX(0); }
+    @supports (animation-timeline: scroll()) { .progress { animation: grow linear both; animation-timeline: scroll(root); } }
+    @keyframes grow { to { transform: scaleX(1); } }
 
     /* Botões */
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; padding: .95rem 1.6rem; border-radius: 999px; border: 2px solid transparent; font-weight: 700; font-size: 1rem; text-decoration: none; white-space: nowrap; cursor: pointer; transition: transform .2s, box-shadow .2s, background-color .2s, border-color .2s; }
+    .btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: .6rem; padding: .95rem 1.6rem; border-radius: 999px; border: 2px solid transparent; font-weight: 700; font-size: 1rem; text-decoration: none; white-space: nowrap; cursor: pointer; transition: transform .2s, box-shadow .2s, background-color .2s, border-color .2s; }
     .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: scale(.97); }
     .btn svg { width: 1.25em; height: 1.25em; flex: none; }
     .btn-white { background: #fff; color: var(--pink-700); box-shadow: 0 14px 30px -12px rgba(36, 7, 26, .55); }
     .btn-white:hover { background: var(--blush); }
@@ -59,72 +72,115 @@
     .btn-outline { background: #fff; border-color: var(--line); color: var(--pink-700); }
     .btn-outline:hover { border-color: var(--pink-300); }
     .btn-sm { padding: .6rem 1.1rem; font-size: .9rem; }
+    /* Brilho que passa pelos botões principais */
+    .btn-white::after, .btn-pink::after { content: ""; position: absolute; inset: 0; transform: translateX(-120%); animation: shine 4.5s ease-in-out infinite; pointer-events: none; }
+    .btn-pink::after { background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .5) 50%, transparent 62%); }
+    .btn-white::after { background: linear-gradient(105deg, transparent 38%, rgba(230, 36, 127, .2) 50%, transparent 62%); }
+    @keyframes shine { 0%, 55% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
 
-    /* Menu flutuante */
-    .nav { position: fixed; inset: .75rem 0 auto; z-index: 50; pointer-events: none; }
-    .nav-in { pointer-events: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: rgba(255, 255, 255, .93); backdrop-filter: blur(12px); border-radius: 999px; padding: .45rem .45rem .45rem 1.25rem; box-shadow: 0 12px 30px -14px rgba(36, 7, 26, .45); }
+    /* Menu do topo: solto no celular (a barra de baixo navega), fixo no desktop */
+    .nav { position: absolute; inset: .75rem 0 auto; z-index: 50; pointer-events: none; }
+    @media (min-width: 860px) { .nav { position: fixed; } }
+    .nav-in { pointer-events: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: rgba(255, 255, 255, .93); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-radius: 999px; padding: .45rem .45rem .45rem 1.25rem; box-shadow: 0 12px 30px -14px rgba(36, 7, 26, .45); animation: drop .7s var(--ease) both; }
+    @keyframes drop { from { opacity: 0; transform: translateY(-20px); } }
     .brand { font-family: var(--font-d); font-size: clamp(1.3rem, 5.6vw, 1.55rem); line-height: 1; letter-spacing: .03em; color: var(--pink-600); text-decoration: none; white-space: nowrap; padding-top: .15rem; }
     .brand span { color: var(--plum); }
     .nav-links { display: none; gap: 1.75rem; }
     .nav-links a { text-decoration: none; font-weight: 500; font-size: .95rem; transition: color .2s; }
     .nav-links a:hover { color: var(--pink-600); }
-    @media (min-width: 860px) { .nav-links { display: flex; } }
+    .nav-ig { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--pink), var(--pink-600)); }
+    .nav-ig svg { width: 22px; height: 22px; }
+    .nav-cta { display: none; }
+    @media (min-width: 860px) { .nav-links { display: flex; } .nav-ig { display: none; } .nav-cta { display: inline-flex; } }
 
     /* Hero */
-    .hero { position: relative; overflow: hidden; color: #fff; padding: 8rem 0 5rem; background: radial-gradient(55% 55% at 0% 100%, #A80E57 0%, transparent 70%), linear-gradient(160deg, #E6247F 0%, #D61B73 55%, #B8105E 100%); }
-    .hero::after { content: "10"; position: absolute; right: -3%; bottom: -18%; font-family: var(--font-d); font-size: clamp(18rem, 46vw, 40rem); line-height: 1; color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, .13); pointer-events: none; }
-    .hero-grid { position: relative; z-index: 1; display: grid; gap: 3.5rem; align-items: center; }
-    @media (min-width: 960px) { .hero-grid { grid-template-columns: 1.1fr .9fr; } }
+    .hero { position: relative; overflow: hidden; color: #fff; padding: 6.25rem 0 3.5rem; background: radial-gradient(55% 55% at 0% 100%, #A80E57 0%, transparent 70%), linear-gradient(160deg, #E6247F 0%, #D61B73 55%, #B8105E 100%); }
+    .hero::after { content: "10"; position: absolute; right: -3%; bottom: -18%; font-family: var(--font-d); font-size: clamp(18rem, 46vw, 40rem); line-height: 1; color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, .13); pointer-events: none; animation: drift 12s ease-in-out infinite alternate; }
+    .glow { position: absolute; width: 50vmax; height: 50vmax; right: -25vmax; top: -25vmax; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, .2), transparent 65%); pointer-events: none; animation: drift 9s ease-in-out infinite alternate; }
+    @keyframes drift { to { transform: translate(-2%, -4%); } }
+    .hero-grid { position: relative; z-index: 1; display: grid; gap: 2.25rem; align-items: center; grid-template-areas: "text" "art" "stats"; }
+    .hero-text { grid-area: text; }
+    @media (min-width: 960px) {
+      .hero { padding: 8.5rem 0 5.5rem; }
+      .hero-grid { grid-template-columns: 1.1fr .9fr; grid-template-areas: "text art" "stats art"; column-gap: 3.5rem; }
+      .hero-text { align-self: end; }
+    }
+    /* Entrada em cascata: cada bloco sobe com um atraso (--d) */
+    .up { animation: rise .7s var(--ease) both; animation-delay: var(--d, 0s); }
+    @keyframes rise { from { opacity: 0; transform: translateY(26px); } }
     .eyebrow { display: inline-flex; align-items: center; gap: .55rem; background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: .4rem 1rem; font-size: clamp(.66rem, 2.9vw, .78rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-    .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--blush); }
-    h1 { margin: 1.25rem 0 1.1rem; font-weight: 400; }
+    .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--blush); animation: blink 1.8s ease-in-out infinite; }
+    @keyframes blink { 50% { opacity: .3; } }
+    h1 { margin: 1.1rem 0 1rem; font-weight: 400; }
     h1 .serif { display: block; font-family: var(--font-s); font-style: italic; font-size: clamp(2rem, 5.5vw, 3.3rem); line-height: 1.1; color: var(--blush); }
     h1 .big { display: block; font-family: var(--font-d); font-size: clamp(4.8rem, 16vw, 9.5rem); line-height: .88; letter-spacing: .01em; text-shadow: 0 5px 0 var(--pink-700), 0 20px 30px rgba(36, 7, 26, .3); }
-    h1 .big em { font-style: normal; color: var(--blush); }
-    .sub { font-size: 1.1rem; max-width: 33rem; line-height: 1.65; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.75rem; }
-    .stats { display: flex; flex-wrap: wrap; gap: 1.25rem 2.5rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .28); }
-    .stat b { display: block; font-family: var(--font-d); font-weight: 400; font-size: 2.4rem; line-height: 1; }
-    .stat span { font-size: .85rem; }
+    h1 .big em { display: inline-block; font-style: normal; color: var(--blush); animation: tada 5s 2s ease-in-out infinite; }
+    @keyframes tada { 0%, 86%, 100% { transform: none; } 90% { transform: rotate(-3deg) scale(1.06); } 94% { transform: rotate(3deg) scale(1.06); } 97% { transform: rotate(-2deg) scale(1.03); } }
+    .sub { font-size: 1.08rem; max-width: 33rem; line-height: 1.65; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.6rem; }
+    .hero-cta .btn { flex: 1 1 auto; padding-inline: .8rem; font-size: .95rem; }
+    @media (min-width: 360px) { .hero-cta { flex-wrap: nowrap; } } /* lado a lado no celular; abaixo de 360px empilha */
+    @media (min-width: 600px) { .hero-cta .btn { flex: 0 0 auto; padding-inline: 1.6rem; font-size: 1rem; } }
+    .stats { grid-area: stats; display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; max-width: 27rem; }
+    @media (min-width: 960px) { .stats { align-self: start; } }
+    .stat { text-align: center; padding: .8rem .3rem; border-radius: 16px; background: rgba(255, 255, 255, .13); border: 1px solid rgba(255, 255, 255, .28); }
+    .stat b { display: block; font-family: var(--font-d); font-weight: 400; font-size: clamp(1.6rem, 7.2vw, 2.4rem); line-height: 1; white-space: nowrap; }
+    .stat > span { display: block; margin-top: .15rem; font-size: .8rem; }
+    [data-count] { display: inline-block; text-align: left; }
 
     /* Arte do hero */
-    .art { position: relative; width: min(430px, 86%); margin-inline: auto; aspect-ratio: 1; }
+    .art { grid-area: art; position: relative; width: min(340px, 78%); margin-inline: auto; aspect-ratio: 1; animation: pop .9s var(--ease) .25s both; }
+    @media (min-width: 960px) { .art { width: min(430px, 86%); } }
+    @keyframes pop { 0% { opacity: 0; transform: scale(.7) rotate(-8deg); } 70% { opacity: 1; transform: scale(1.04) rotate(1deg); } }
     .art::before { content: ""; position: absolute; inset: 4%; border-radius: 50%; background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, .42), rgba(255, 255, 255, .08) 62%); border: 1px solid rgba(255, 255, 255, .4); }
-    .art::after { content: ""; position: absolute; inset: -5%; border-radius: 50%; border: 1px dashed rgba(255, 255, 255, .35); }
+    .art::after { content: ""; position: absolute; inset: -5%; border-radius: 50%; border: 1px dashed rgba(255, 255, 255, .4); animation: spin 40s linear infinite; }
     .lip { position: relative; z-index: 1; width: 100%; height: 100%; filter: drop-shadow(0 28px 26px rgba(36, 7, 26, .38)); animation: float 6s ease-in-out infinite; }
     @keyframes float { 50% { transform: translateY(-10px); } }
-    .sticker { position: absolute; z-index: 2; left: -5%; bottom: 3%; width: 36%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--plum); color: var(--blush); box-shadow: 0 18px 30px -10px rgba(36, 7, 26, .6); }
+    .spark path { animation: twinkle 2.6s ease-in-out infinite; }
+    .spark path:nth-child(2) { animation-delay: .8s; }
+    .spark path:nth-child(3) { animation-delay: 1.5s; }
+    @keyframes twinkle { 50% { opacity: .2; } }
+    .sticker { position: absolute; z-index: 2; left: -5%; bottom: 3%; width: 36%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--plum); color: var(--blush); box-shadow: 0 18px 30px -10px rgba(36, 7, 26, .6); animation: pop .7s var(--ease) .8s both; }
     .sticker svg { position: absolute; inset: 0; animation: spin 20s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .sticker b { font-family: var(--font-d); font-weight: 400; font-size: clamp(1.4rem, 5.2vw, 2.4rem); line-height: .9; text-align: center; color: #fff; }
-    .chip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: .5rem; background: #fff; color: var(--ink); font-weight: 700; font-size: .85rem; padding: .55rem .95rem; border-radius: 999px; box-shadow: 0 14px 30px -10px rgba(36, 7, 26, .5); white-space: nowrap; }
+    .chip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: .5rem; background: #fff; color: var(--ink); font-weight: 700; font-size: clamp(.74rem, 3.2vw, .85rem); padding: .55rem .95rem; border-radius: 999px; box-shadow: 0 14px 30px -10px rgba(36, 7, 26, .5); white-space: nowrap; }
     .chip svg { width: 1.1rem; height: 1.1rem; color: var(--pink-600); }
-    .chip-1 { top: 9%; right: -6%; }
-    .chip-2 { bottom: 14%; right: -4%; }
+    .chip-1 { top: 9%; right: -6%; animation: rise .6s var(--ease) 1.05s both, bob 5s 1.8s ease-in-out infinite; }
+    .chip-2 { bottom: 14%; right: -4%; animation: rise .6s var(--ease) 1.25s both, bob 5s 3s ease-in-out infinite; }
+    @keyframes bob { 50% { transform: translateY(-7px); } }
 
-    /* Faixa */
-    .strip { background: var(--plum); color: var(--blush); font-family: var(--font-d); font-size: 1.5rem; letter-spacing: .04em; padding: .85rem 0; overflow: hidden; white-space: nowrap; }
-    .strip-track { display: inline-block; animation: slide 30s linear infinite; }
-    .strip-track span { margin: 0 1.1rem; }
-    .strip-track i { font-style: normal; color: var(--pink-300); }
+    /* Faixa dupla em movimento */
+    .band { background: var(--plum); padding: .9rem 0 1rem; overflow: hidden; white-space: nowrap; font-family: var(--font-d); font-size: clamp(2rem, 7.5vw, 3.6rem); line-height: 1.08; letter-spacing: .03em; }
+    .track { display: inline-block; animation: slide 38s linear infinite; will-change: transform; }
+    .track span { margin: 0 .55em; }
+    .track i { font-style: normal; font-size: .6em; vertical-align: .2em; color: var(--pink); }
+    .row { color: var(--blush); }
+    .row.rev { color: transparent; -webkit-text-stroke: 1.5px var(--pink-300); }
+    .row.rev .track { animation-direction: reverse; animation-duration: 46s; }
+    .row.rev i { -webkit-text-stroke: 0; color: var(--pink-300); }
     @keyframes slide { to { transform: translateX(-50%); } }
 
     /* Títulos de seção */
-    .head { margin-bottom: 2.75rem; }
+    .head { margin-bottom: 2.5rem; }
     .head.center { text-align: center; }
     .kicker { font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--pink-600); }
-    .h2 { font-family: var(--font-d); font-weight: 400; font-size: clamp(2.7rem, 7vw, 4.2rem); line-height: .95; color: var(--plum); margin: .4rem 0 .8rem; }
-    .h2 em { font-family: var(--font-s); font-size: .86em; color: var(--pink-600); }
+    .h2 { font-family: var(--font-d); font-weight: 400; font-size: clamp(2.7rem, 7vw, 4.2rem); line-height: .95; color: var(--plum); margin: .4rem 0 .9rem; }
+    .h2 em { position: relative; font-family: var(--font-s); font-size: .86em; color: var(--pink-600); white-space: nowrap; }
+    /* Rabisco que se desenha embaixo da palavra em destaque */
+    .h2 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.14em; height: .2em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8c18-7 30 5 48 0s30-6 48-1 14 2 20 0' fill='none' stroke='%23E6247F' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%; clip-path: inset(0); transition: clip-path .9s var(--ease) .35s; }
+    .js .reveal:not(.in) .h2 em::after { clip-path: inset(0 100% 0 0); }
     .lead { color: var(--muted); max-width: 38rem; font-size: 1.05rem; }
     .center .lead { margin-inline: auto; }
 
     /* Dois jeitos de comprar */
-    .ways { display: grid; gap: 1.5rem; }
-    @media (min-width: 860px) { .ways { grid-template-columns: 1fr 1fr; } }
-    .way { position: relative; overflow: hidden; border-radius: var(--r-lg); padding: clamp(1.75rem, 4vw, 2.75rem); display: flex; flex-direction: column; gap: 1rem; }
+    .ways { display: grid; gap: 1.25rem; }
+    @media (min-width: 860px) { .ways { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+    .way { position: relative; overflow: hidden; border-radius: var(--r-lg); padding: clamp(1.6rem, 4vw, 2.75rem); display: flex; flex-direction: column; gap: 1rem; }
     .way-store { background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); }
     .way-online { background: linear-gradient(150deg, var(--plum-700), var(--plum)); color: #fff; }
-    .way-online::after { content: ""; position: absolute; top: -30%; right: -20%; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(230, 36, 127, .55), transparent 65%); pointer-events: none; }
+    .way-online::after { content: ""; position: absolute; top: -30%; right: -20%; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(230, 36, 127, .55), transparent 65%); pointer-events: none; animation: breathe 6s ease-in-out infinite alternate; }
+    @keyframes breathe { to { transform: scale(1.2); } }
     .way > * { position: relative; z-index: 1; }
     .ico { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; background: var(--blush); color: var(--pink-600); }
     .ico svg { width: 28px; height: 28px; }
@@ -137,80 +193,122 @@
     .way li::before { content: ""; flex: none; width: .55rem; height: .55rem; border-radius: 50%; background: var(--pink); box-shadow: 0 0 0 4px rgba(230, 36, 127, .18); }
     .way-online li::before { background: var(--pink-300); box-shadow: 0 0 0 4px rgba(247, 143, 187, .2); }
     .way .btns { margin-top: auto; padding-top: .75rem; display: flex; flex-wrap: wrap; gap: .7rem; }
+    .way .btn { flex: 1 1 auto; }
+    @media (min-width: 600px) { .way .btn { flex: 0 0 auto; } }
 
-    /* Categorias */
+    /* Categorias: carrossel de arrastar no celular, grade no desktop */
     .products { background: #fff; }
-    .cats { display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr); }
-    @media (min-width: 700px) { .cats { grid-template-columns: repeat(3, 1fr); } }
+    .cats { display: flex; gap: .9rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 1.25rem; margin-inline: -1.25rem; padding: .5rem 1.25rem 1rem; scrollbar-width: none; }
+    .cats::-webkit-scrollbar { display: none; }
+    .cat { flex: 0 0 44%; scroll-snap-align: start; display: block; text-decoration: none; text-align: center; background: var(--rose-50); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.6rem 1rem 1.3rem; }
+    .cat:hover { border-color: var(--pink-300); box-shadow: var(--shadow); translate: 0 -4px; }
+    .cat:active { scale: .96; }
+    @media (min-width: 700px) { .cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; overflow: visible; margin-inline: 0; padding: 0; } }
     @media (min-width: 1024px) { .cats { grid-template-columns: repeat(6, 1fr); } }
-    .cat { background: var(--rose-50); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.6rem 1rem 1.3rem; text-align: center; }
-    .ring { width: 64px; height: 64px; margin: 0 auto .9rem; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--pink), var(--pink-600)); color: #fff; box-shadow: 0 12px 22px -12px rgba(201, 20, 104, .9); }
+    .ring { width: 64px; height: 64px; margin: 0 auto .9rem; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--pink), var(--pink-600)); color: #fff; box-shadow: 0 12px 22px -12px rgba(201, 20, 104, .9); transition: scale .25s var(--ease), rotate .25s var(--ease); }
+    .cat:hover .ring { scale: 1.1; rotate: -8deg; }
     .ring svg { width: 30px; height: 30px; }
     .cat b { display: block; }
     .cat span { display: inline-block; margin-top: .4rem; font-size: .78rem; font-weight: 700; color: var(--pink-700); background: var(--blush); border-radius: 999px; padding: .15rem .7rem; }
+    .hint { margin-top: 1rem; text-align: center; font-size: .88rem; color: var(--muted); }
 
-    /* Como pedir */
+    /* Como pedir: linha compacta no celular, cartões no desktop */
     .how { background: linear-gradient(180deg, #FFE7EF, var(--rose-50)); }
-    .steps { display: grid; gap: 1.25rem; counter-reset: s; }
-    @media (min-width: 860px) { .steps { grid-template-columns: repeat(3, 1fr); } }
-    .step { background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 2rem 1.75rem; }
-    .step::before { counter-increment: s; content: "0" counter(s); display: block; margin-bottom: .75rem; font-family: var(--font-d); font-size: 3.6rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px var(--pink); }
-    .step h3 { font-size: 1.15rem; color: var(--plum); margin-bottom: .35rem; }
-    .step p { color: var(--muted); font-size: .97rem; }
+    .steps { display: grid; gap: 1rem; counter-reset: s; }
+    .step { display: grid; grid-template-columns: auto 1fr; column-gap: 1.1rem; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.25rem 1.4rem; }
+    .step::before { counter-increment: s; content: "0" counter(s); grid-row: span 2; font-family: var(--font-d); font-size: 3.2rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px var(--pink); }
+    .step h3 { font-size: 1.1rem; color: var(--plum); align-self: end; }
+    .step p { color: var(--muted); font-size: .95rem; align-self: start; }
+    @media (min-width: 860px) {
+      .steps { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+      .step { display: block; padding: 2rem 1.75rem; }
+      .step::before { display: block; margin-bottom: .75rem; font-size: 3.6rem; }
+      .step h3 { margin-bottom: .35rem; }
+    }
 
     /* Lojas */
     .stores { background: #fff; }
-    .grid3 { display: grid; gap: 1.5rem; }
-    @media (min-width: 900px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
-    .store { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--rose-50); transition: box-shadow .25s, border-color .25s; }
-    .store:hover { border-color: var(--pink-300); box-shadow: var(--shadow); }
-    .store-top { position: relative; overflow: hidden; padding: 1.5rem 1.75rem; color: #fff; background: linear-gradient(135deg, var(--pink), var(--pink-600)); }
+    .grid3 { display: grid; gap: 1.25rem; }
+    @media (min-width: 900px) { .grid3 { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+    .store { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--rose-50); }
+    .store:hover { border-color: var(--pink-300); box-shadow: var(--shadow); translate: 0 -4px; }
+    .store-top { position: relative; overflow: hidden; padding: 1.4rem 1.6rem; color: #fff; background: linear-gradient(135deg, var(--pink), var(--pink-600)); }
     .store-top::after { content: attr(data-n); position: absolute; right: .75rem; bottom: -1.7rem; font-family: var(--font-d); font-size: 7rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, .4); }
     .store-top small { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
     .store-top h3 { font-family: var(--font-d); font-weight: 400; font-size: 2.4rem; line-height: 1; }
-    .store-body { flex: 1; display: flex; flex-direction: column; gap: 1.1rem; padding: 1.5rem 1.75rem 1.75rem; }
+    .store-body { flex: 1; display: flex; flex-direction: column; gap: 1.1rem; padding: 1.4rem 1.6rem 1.6rem; }
     .addr { display: flex; gap: .6rem; }
     .addr svg { width: 1.25rem; height: 1.25rem; flex: none; margin-top: .15rem; color: var(--pink-600); }
     .store .btns { margin-top: auto; display: flex; flex-wrap: wrap; gap: .6rem; }
-    .store .btn { flex: 1 1 auto; padding: .8rem 1rem; font-size: .92rem; white-space: nowrap; }
+    .store .btn { flex: 1 1 auto; padding: .85rem 1rem; font-size: .92rem; }
 
     /* Instagram */
     .insta { position: relative; overflow: hidden; text-align: center; color: #fff; background: linear-gradient(135deg, #E6247F, #B8105E); }
-    .insta::before, .insta::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .22); pointer-events: none; }
+    .insta::before, .insta::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .22); pointer-events: none; animation: breathe 7s ease-in-out infinite alternate; }
     .insta::before { width: 420px; height: 420px; left: -140px; top: -160px; }
     .insta::after { width: 520px; height: 520px; right: -200px; bottom: -280px; }
     .insta .wrap { position: relative; z-index: 1; }
+    .ig-badge { width: 72px; height: 72px; margin: 0 auto 1.25rem; border-radius: 22px; display: grid; place-items: center; background: #fff; color: var(--pink-600); box-shadow: 0 18px 30px -12px rgba(36, 7, 26, .55); animation: bob 5s ease-in-out infinite; }
+    .ig-badge svg { width: 38px; height: 38px; }
     .insta .kicker { color: var(--blush); }
     .insta .h2 { color: #fff; }
     .insta .lead { color: #fff; margin: 0 auto 1.75rem; }
 
-    /* Rodapé */
-    footer { background: var(--plum); color: #E9CFDB; padding: 4rem 0 5.5rem; font-size: .93rem; } /* folga embaixo para o botão flutuante */
-    .foot { display: grid; gap: 2.5rem; }
-    @media (min-width: 800px) { .foot { grid-template-columns: 1.3fr 1.2fr 1fr .8fr; } }
+    /* Rodapé (folga embaixo para a barra do celular) */
+    footer { background: var(--plum); color: #E9CFDB; padding: 3.5rem 0 7rem; font-size: .93rem; }
+    @media (min-width: 860px) { footer { padding: 4rem 0 2.5rem; } }
+    .foot { display: grid; gap: 2.25rem; }
+    @media (min-width: 800px) { .foot { grid-template-columns: 1.3fr 1.2fr 1fr .8fr; gap: 2.5rem; } }
     .brand-f { font-family: var(--font-d); font-size: 2.6rem; line-height: .95; color: var(--blush); margin-bottom: .75rem; }
     .foot h4 { color: #fff; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .9rem; }
     .foot li { margin-bottom: .55rem; }
-    .foot a { text-decoration: none; transition: color .2s; }
+    .foot a { display: inline-block; padding: .2rem 0; text-decoration: none; transition: color .2s; }
     .foot a:hover { color: var(--pink-200); }
     .copy { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .14); text-align: center; font-size: .82rem; }
 
-    /* WhatsApp flutuante */
-    .fab { position: fixed; right: 1rem; bottom: 1rem; z-index: 60; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--pink), var(--pink-600)); border: 3px solid #fff; box-shadow: 0 14px 30px -8px rgba(36, 7, 26, .6); transition: transform .2s; }
-    .fab:hover { transform: scale(1.06); }
-    .fab svg { width: 28px; height: 28px; }
+    /* Barra de atalhos do celular */
+    .tabbar { position: fixed; z-index: 60; left: .75rem; right: .75rem; bottom: calc(.6rem + env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(4, 1fr); gap: .25rem; padding: .35rem; border-radius: 22px; background: rgba(255, 255, 255, .95); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 16px 34px -12px rgba(36, 7, 26, .55), 0 0 0 1px var(--line); animation: barIn .7s var(--ease) .9s both; }
+    @keyframes barIn { from { opacity: 0; transform: translateY(130%); } }
+    .tab { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; min-height: 52px; border-radius: 16px; font-size: .68rem; font-weight: 700; color: var(--muted); text-decoration: none; transition: color .2s, background-color .2s, scale .15s; }
+    .tab svg { width: 22px; height: 22px; }
+    .tab:active { scale: .93; }
+    .tab.on { color: var(--pink-600); background: var(--blush); }
+    .tab-wa { color: #fff; background: linear-gradient(135deg, var(--pink), var(--pink-600)); }
+    @media (min-width: 860px) { .tabbar { display: none; } }
 
-    /* Entrada ao rolar */
-    .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+    /* WhatsApp flutuante (só desktop) */
+    .fab { display: none; position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 60; width: 60px; height: 60px; border-radius: 50%; place-items: center; color: #fff; background: linear-gradient(135deg, var(--pink), var(--pink-600)); border: 3px solid #fff; box-shadow: 0 14px 30px -8px rgba(36, 7, 26, .6); transition: scale .2s; }
+    @media (min-width: 860px) { .fab { display: grid; } }
+    .fab:hover { scale: 1.08; }
+    .fab svg { width: 28px; height: 28px; }
+    /* Anel que pulsa nos botões de WhatsApp fixos */
+    .fab::before, .tab-wa::before { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid var(--pink); animation: pulse 2.4s ease-out infinite; pointer-events: none; }
+    @keyframes pulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(1.45); opacity: 0; } }
+
+    /* Entrada ao rolar: --i escalona os irmãos; data-r muda a direção */
+    .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease), translate .25s var(--ease), scale .15s, box-shadow .25s, border-color .25s; transition-delay: calc(var(--i, 0) * 90ms); }
+    .js .reveal[data-r="l"] { transform: translateX(-34px); }
+    .js .reveal[data-r="r"] { transform: translateX(34px); }
+    .js .reveal[data-r="z"] { transform: scale(.9); }
     .js .reveal.in { opacity: 1; transform: none; }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .lip, .sticker svg, .strip-track { animation: none; }
-      .js .reveal { opacity: 1; transform: none; transition: none; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+      .track { animation: none !important; }
     }
   </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Store","name":"Be Makes Tudo 10","description":"Loja de maquiagem a preço fixo: tudo R$ 10,00. Loja física e online em Campinas/SP.","url":"https://juagads.github.io/bemakes-tudo10/","priceRange":"R$ 10","sameAs":["https://www.instagram.com/bemakes_tudo10/"],"department":[
+    {"@type":"Store","name":"Be Makes Tudo 10 — Ouro Verde","telephone":"+55 19 99249-4551","address":{"@type":"PostalAddress","streetAddress":"Av. Ruy Rodrigues, 4452","addressLocality":"Campinas","addressRegion":"SP","addressCountry":"BR"}},
+    {"@type":"Store","name":"Be Makes Tudo 10 — Centro","telephone":"+55 19 98975-7098","address":{"@type":"PostalAddress","streetAddress":"Av. Dr. Morais Salles, 416","addressLocality":"Campinas","addressRegion":"SP","addressCountry":"BR"}},
+    {"@type":"Store","name":"Be Makes Tudo 10 — Ibrantina Cardona","address":{"@type":"PostalAddress","streetAddress":"Rua Ibrantina Cardona, 741","addressLocality":"Campinas","addressRegion":"SP","addressCountry":"BR"}}
+  ]}
+  </script>
 </head>
 <body>
+  <div class="progress" aria-hidden="true"></div>
+
   <!-- Ícones -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
@@ -220,10 +318,10 @@
     <symbol id="i-bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></g></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-lip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="13" width="8" height="8" rx="1"/><path d="M9.5 13v-3h5v3"/><path d="M10.5 10V5.5l3-2V10"/></g></symbol>
-    <symbol id="i-lash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 10c3.5 4.5 14.500 4.500 18 0"/><path d="M5.200 12.500 3.800 14.500M8.500 14.200l-.8 2.300M12 14.800v2.500M15.500 14.200l.8 2.300M18.800 12.500l1.400 2"/></g></symbol>
-    <symbol id="i-brush" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-7"/><rect x="10" y="10" width="4" height="4" rx=".5"/><path d="M10 10c-.6-3.500.4-7 2-7s2.600 3.500 2 7z"/></g></symbol>
-    <symbol id="i-pal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.500"/><circle cx="8" cy="10" r="1.600"/><circle cx="12" cy="10" r="1.600"/><circle cx="16" cy="10" r="1.600"/><path d="M7 15.500h10"/></g></symbol>
-    <symbol id="i-comp" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.500"/><circle cx="12" cy="12" r="4.500"/><path d="M12 3.500v-1"/></g></symbol>
+    <symbol id="i-lash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 10c3.5 4.5 14.5 4.5 18 0"/><path d="M5.2 12.5 3.8 14.5M8.5 14.2l-.8 2.3M12 14.8v2.5M15.5 14.2l.8 2.3M18.8 12.5l1.4 2"/></g></symbol>
+    <symbol id="i-brush" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-7"/><rect x="10" y="10" width="4" height="4" rx=".5"/><path d="M10 10c-.6-3.5.4-7 2-7s2.6 3.5 2 7z"/></g></symbol>
+    <symbol id="i-pal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8" cy="10" r="1.6"/><circle cx="12" cy="10" r="1.6"/><circle cx="16" cy="10" r="1.6"/><path d="M7 15.5h10"/></g></symbol>
+    <symbol id="i-comp" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3.5v-1"/></g></symbol>
     <symbol id="i-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1z"/><path d="M14 7l3 3"/></g></symbol>
   </svg>
 
@@ -237,27 +335,24 @@
         <a href="#como-pedir">Como pedir</a>
         <a href="#lojas">Lojas</a>
       </div>
-      <a class="btn btn-pink btn-sm" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir agora</a>
+      <a class="nav-ig" href="https://www.instagram.com/bemakes_tudo10/" target="_blank" rel="noopener" aria-label="Instagram da Be Makes"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+      <a class="btn btn-pink btn-sm nav-cta" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir agora</a>
     </div>
   </nav>
 
   <header class="hero" id="topo">
+    <span class="glow" aria-hidden="true"></span>
     <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow"><i></i>Maquiagem a preço fixo · Campinas</span>
+      <div class="hero-text">
+        <span class="eyebrow up"><i></i>Maquiagem a preço fixo · Campinas</span>
         <h1>
-          <span class="serif">Sua make completa,</span>
-          <span class="big">Tudo por <em>R$&nbsp;10</em></span>
+          <span class="serif up" style="--d:.06s">Sua make completa,</span>
+          <span class="big up" style="--d:.12s">Tudo por <em>R$&nbsp;10</em></span>
         </h1>
-        <p class="sub">Batom, cílios, pincéis, sombras e muito mais com preço único. Compre nas nossas lojas físicas ou peça online e receba em casa.</p>
-        <div class="hero-cta">
+        <p class="sub up" style="--d:.22s">Batom, cílios, pincéis, sombras e muito mais com preço único. Compre nas nossas lojas físicas ou peça online e receba em casa.</p>
+        <div class="hero-cta up" style="--d:.3s">
           <a class="btn btn-white" href="#comprar"><svg aria-hidden="true"><use href="#i-bag"/></svg>Comprar online</a>
-          <a class="btn btn-glass" href="#lojas"><svg aria-hidden="true"><use href="#i-pin"/></svg>Ver lojas físicas</a>
-        </div>
-        <div class="stats">
-          <div class="stat"><b>R$ 10</b><span>preço único</span></div>
-          <div class="stat"><b>3</b><span>lojas físicas</span></div>
-          <div class="stat"><b>34 mil+</b><span>seguidores no Instagram</span></div>
+          <a class="btn btn-glass" href="#lojas"><svg aria-hidden="true"><use href="#i-pin"/></svg>Ver lojas</a>
         </div>
       </div>
 
@@ -282,7 +377,7 @@
             <ellipse cx="118" cy="382" rx="40" ry="11" fill="#050406"/>
             <ellipse cx="118" cy="382" rx="31" ry="7" fill="#2B262D"/>
           </g>
-          <g fill="#fff">
+          <g class="spark" fill="#fff">
             <path transform="translate(330 96) scale(1.5)" d="M0-10C1-3 3-1 10 0 3 1 1 3 0 10-1 3-3 1-10 0-3-1-1-3 0-10z"/>
             <path transform="translate(84 130)" d="M0-10C1-3 3-1 10 0 3 1 1 3 0 10-1 3-3 1-10 0-3-1-1-3 0-10z"/>
             <path transform="translate(352 300) scale(.8)" d="M0-10C1-3 3-1 10 0 3 1 1 3 0 10-1 3-3 1-10 0-3-1-1-3 0-10z"/>
@@ -295,14 +390,24 @@
         <span class="chip chip-1"><svg><use href="#i-store"/></svg>Loja física + online</span>
         <span class="chip chip-2"><svg><use href="#i-bag"/></svg>Receba em casa</span>
       </div>
+
+      <div class="stats up" style="--d:.4s">
+        <div class="stat"><b>R$ <span data-count="10">10</span></b><span>preço único</span></div>
+        <div class="stat"><b><span data-count="3">3</span></b><span>lojas físicas</span></div>
+        <div class="stat"><b><span data-count="34">34</span> mil+</b><span>seguidores</span></div>
+      </div>
     </div>
   </header>
 
-  <div class="strip" aria-hidden="true">
-    <div class="strip-track">
-      <span>Tudo R$ 10</span><i>✦</i><span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i><span>Loja física e online</span><i>✦</i>
-      <span>Tudo R$ 10</span><i>✦</i><span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i><span>Loja física e online</span><i>✦</i>
-    </div>
+  <div class="band" aria-hidden="true">
+    <div class="row"><div class="track">
+      <span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>Loja física e online</span><i>✦</i><span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>Loja física e online</span><i>✦</i>
+      <span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>Loja física e online</span><i>✦</i><span>Tudo R$ 10</span><i>✦</i><span>Preço fixo</span><i>✦</i><span>Loja física e online</span><i>✦</i>
+    </div></div>
+    <div class="row rev"><div class="track">
+      <span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i><span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i>
+      <span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i><span>Batom</span><i>✦</i><span>Cílios</span><i>✦</i><span>Pincéis</span><i>✦</i><span>Sombras</span><i>✦</i><span>Pó</span><i>✦</i><span>Delineador</span><i>✦</i>
+    </div></div>
   </div>
 
   <section id="comprar">
@@ -313,7 +418,7 @@
         <p class="lead">Na loja ou no celular, o preço é o mesmo: R$ 10,00.</p>
       </div>
       <div class="ways">
-        <article class="way way-store reveal">
+        <article class="way way-store reveal" data-r="l">
           <span class="ico"><svg aria-hidden="true"><use href="#i-store"/></svg></span>
           <h3>Na loja física</h3>
           <p>Veja de perto, escolha com calma e leve na hora.</p>
@@ -326,7 +431,7 @@
             <a class="btn btn-pink" href="#lojas">Encontrar uma loja<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
         </article>
-        <article class="way way-online reveal">
+        <article class="way way-online reveal" data-r="r">
           <span class="ico"><svg aria-hidden="true"><use href="#i-bag"/></svg></span>
           <h3>Na loja online</h3>
           <p>Monte seu pedido pelo site ou pelo WhatsApp, sem sair de casa.</p>
@@ -352,14 +457,16 @@
         <h2 class="h2">O que você <em>encontra</em></h2>
         <p class="lead">Tudo isso, e muito mais, pelo mesmo preço.</p>
       </div>
-      <div class="cats reveal">
-        <div class="cat"><div class="ring"><svg aria-hidden="true"><use href="#i-lip"/></svg></div><b>Batom</b><span>R$ 10,00</span></div>
-        <div class="cat"><div class="ring"><svg aria-hidden="true"><use href="#i-lash"/></svg></div><b>Cílios</b><span>R$ 10,00</span></div>
-        <div class="cat"><div class="ring"><svg aria-hidden="true"><use href="#i-brush"/></svg></div><b>Pincéis</b><span>R$ 10,00</span></div>
-        <div class="cat"><div class="ring"><svg aria-hidden="true"><use href="#i-pal"/></svg></div><b>Sombras</b><span>R$ 10,00</span></div>
-        <div class="cat"><div class="ring"><svg aria-hidden="true"><use href="#i-comp"/></svg></div><b>Pó</b><span>R$ 10,00</span></div>
-        <div class="cat"><div class="ring"><svg aria-hidden="true"><use href="#i-pen"/></svg></div><b>Delineador</b><span>R$ 10,00</span></div>
+      <!-- Cada categoria abre o WhatsApp principal com a mensagem já escrita -->
+      <div class="cats">
+        <a class="cat reveal" data-r="z" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20batom." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-lip"/></svg></div><b>Batom</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" style="--i:1" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20c%C3%ADlios." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-lash"/></svg></div><b>Cílios</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" style="--i:2" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20pinc%C3%A9is." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-brush"/></svg></div><b>Pincéis</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20sombras." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-pal"/></svg></div><b>Sombras</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" style="--i:1" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20p%C3%B3." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-comp"/></svg></div><b>Pó</b><span>R$ 10,00</span></a>
+        <a class="cat reveal" data-r="z" style="--i:2" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20ver%20as%20op%C3%A7%C3%B5es%20de%20delineador." target="_blank" rel="noopener"><div class="ring"><svg aria-hidden="true"><use href="#i-pen"/></svg></div><b>Delineador</b><span>R$ 10,00</span></a>
       </div>
+      <p class="hint">Toque em uma categoria para pedir pelo WhatsApp.</p>
     </div>
   </section>
 
@@ -372,8 +479,8 @@
       </div>
       <div class="steps">
         <div class="step reveal"><h3>Escolha seus produtos</h3><p>No site ou direto com a loja pelo WhatsApp.</p></div>
-        <div class="step reveal"><h3>Confirme o pedido</h3><p>A equipe confirma os itens e combina o pagamento com você.</p></div>
-        <div class="step reveal"><h3>Retire ou receba</h3><p>Busque na loja mais perto ou combine a entrega no seu endereço.</p></div>
+        <div class="step reveal" style="--i:1"><h3>Confirme o pedido</h3><p>A equipe confirma os itens e combina o pagamento com você.</p></div>
+        <div class="step reveal" style="--i:2"><h3>Retire ou receba</h3><p>Busque na loja mais perto ou combine a entrega no seu endereço.</p></div>
       </div>
     </div>
   </section>
@@ -396,7 +503,7 @@
             </div>
           </div>
         </article>
-        <article class="store reveal">
+        <article class="store reveal" style="--i:1">
           <div class="store-top" data-n="02"><small>Loja 2</small><h3>Centro</h3></div>
           <div class="store-body">
             <p class="addr"><svg aria-hidden="true"><use href="#i-pin"/></svg>Av. Dr. Morais Salles, 416<br>Centro, Campinas/SP</p>
@@ -406,7 +513,7 @@
             </div>
           </div>
         </article>
-        <article class="store reveal">
+        <article class="store reveal" style="--i:2">
           <!-- TODO: confirmar bairro/cidade e WhatsApp da Loja 3 (só a rua aparece na bio do Instagram) -->
           <div class="store-top" data-n="03"><small>Loja 3</small><h3>Ibrantina Cardona</h3></div>
           <div class="store-body">
@@ -422,7 +529,8 @@
   </section>
 
   <section class="insta">
-    <div class="wrap reveal">
+    <div class="wrap reveal" data-r="z">
+      <div class="ig-badge" aria-hidden="true"><svg><use href="#i-ig"/></svg></div>
       <span class="kicker">Instagram</span>
       <h2 class="h2">@bemakes_tudo10</h2>
       <p class="lead">Mais de 34 mil pessoas acompanham as novidades por lá. Vem também.</p>
@@ -465,12 +573,51 @@
     </div>
   </footer>
 
+  <!-- Barra de atalhos (só celular) -->
+  <nav class="tabbar" aria-label="Atalhos">
+    <a class="tab" href="#comprar"><svg aria-hidden="true"><use href="#i-bag"/></svg>Comprar</a>
+    <a class="tab" href="#produtos"><svg aria-hidden="true"><use href="#i-lip"/></svg>Produtos</a>
+    <a class="tab" href="#lojas"><svg aria-hidden="true"><use href="#i-pin"/></svg>Lojas</a>
+    <a class="tab tab-wa" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+  </nav>
+
   <a class="fab" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener" aria-label="Pedir pelo WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
   <script>
-    // Revela as seções ao rolar; sem JS o conteúdo fica visível (classe .js).
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+    // Revela os blocos ao rolar; sem JS o conteúdo fica visível (classe .js).
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+      // zera o atraso de cascata depois da entrada, para o hover não esperar
+      setTimeout(() => e.target.style.setProperty('--i', 0), 1300);
+    }), { threshold: .12 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Marca na barra do celular a seção que está no meio da tela.
+    const tabs = [...document.querySelectorAll('.tab[href^="#"]')];
+    const spy = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) tabs.forEach(t => t.classList.toggle('on', t.hash === '#' + e.target.id));
+    }), { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('header[id], section, footer').forEach(s => spy.observe(s));
+
+    // Contagem dos números do topo.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('[data-count]').forEach(el => {
+        const end = +el.dataset.count, dur = 1400;
+        el.style.minWidth = el.offsetWidth + 'px'; // evita o texto ao lado pular
+        el.textContent = 0;
+        setTimeout(() => {
+          const t0 = performance.now();
+          const tick = now => {
+            const p = Math.min((now - t0) / dur, 1);
+            el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }, 500);
+      });
+    }
   </script>
 </body>
 </html>
