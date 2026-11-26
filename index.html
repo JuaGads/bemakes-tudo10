@@ -146,10 +146,11 @@
     .art::after { content: ""; position: absolute; inset: -6%; border-radius: 40px; border: 1px dashed rgba(255, 255, 255, .45); rotate: -3deg; }
     .shop { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 26px; border: 6px solid #fff; background: var(--pink-600); rotate: -2deg; box-shadow: 0 30px 50px -18px rgba(36, 7, 26, .6); animation: float 6s ease-in-out infinite; }
     @keyframes float { 50% { transform: translateY(-10px); } }
-    .sticker { position: absolute; z-index: 2; left: -8%; top: -8%; width: 32%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--plum); color: var(--blush); box-shadow: 0 18px 30px -10px rgba(36, 7, 26, .6); animation: pop .7s var(--ease) .8s both; }
-    .sticker svg { position: absolute; inset: 0; animation: spin 20s linear infinite; }
+    /* Selo: tudo dentro de um SVG só, para o texto escalar junto com o círculo; só o anel de texto gira */
+    .sticker { position: absolute; z-index: 2; left: -8%; top: -8%; width: clamp(108px, 34%, 156px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 28%, #4A1236, var(--plum) 70%); color: var(--blush); box-shadow: 0 0 0 3px #fff, 0 18px 30px -10px rgba(36, 7, 26, .6); animation: pop .7s var(--ease) .8s both; }
+    .sticker svg { display: block; width: 100%; height: 100%; }
+    .sticker .ring { transform-origin: 100px 100px; animation: spin 24s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .sticker b { font-family: var(--font-d); font-weight: 400; font-size: clamp(1.4rem, 5.2vw, 2.4rem); line-height: .9; text-align: center; color: #fff; }
     .chip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: .5rem; background: #fff; color: var(--ink); font-weight: 700; font-size: clamp(.74rem, 3.2vw, .85rem); padding: .55rem .95rem; border-radius: 999px; box-shadow: 0 14px 30px -10px rgba(36, 7, 26, .5); white-space: nowrap; }
     .chip svg { width: 1.1rem; height: 1.1rem; color: var(--pink-600); }
     .chip-1 { bottom: 7%; right: -6%; animation: rise .6s var(--ease) 1.05s both, bob 5s 1.8s ease-in-out infinite; }
@@ -368,8 +369,14 @@
         <!-- Foto do Instagram da loja; pessoa, legenda e cartaz removidos com IA (Nim) -->
         <img class="shop" src="img/fachada-600.webp" srcset="img/fachada-600.webp 600w, img/fachada-900.webp 900w" sizes="(min-width: 960px) 430px, min(340px, 78vw)" width="600" height="600" alt="Fachada da Be Makes Tudo 10: letreiro rosa com batom e prateleiras de maquiagem na entrada" fetchpriority="high" decoding="async">
         <div class="sticker" aria-hidden="true">
-          <svg viewBox="0 0 200 200"><defs><path id="ring" d="M100 100m-77 0a77 77 0 1 1 154 0a77 77 0 1 1-154 0"/></defs><text font-family="Bebas Neue, Impact, sans-serif" font-size="20" letter-spacing="2" fill="currentColor"><textPath href="#ring" textLength="476">PREÇO FIXO • TUDO R$ 10 • PREÇO FIXO • TUDO R$ 10 •</textPath></text></svg>
-          <b>R$<br>10</b>
+          <svg viewBox="0 0 200 200" font-family="Bebas Neue, Impact, sans-serif">
+            <defs><path id="ring" d="M100 100m-80 0a80 80 0 1 1 160 0a80 80 0 1 1-160 0"/></defs>
+            <!-- anel com o comprimento da circunferência (2·π·80 ≈ 502): o texto fecha a volta sem sobrar nem encavalar -->
+            <g class="ring"><text font-size="20" fill="currentColor" dominant-baseline="central"><textPath href="#ring" textLength="500" lengthAdjust="spacing">PREÇO FIXO • TUDO R$ 10 • PREÇO FIXO • TUDO R$ 10 • </textPath></text></g>
+            <circle cx="100" cy="100" r="63" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5" stroke-dasharray="3 4"/>
+            <text x="100" y="86" text-anchor="middle" font-size="30" letter-spacing="2" fill="#F78FBB">R$</text>
+            <text x="100" y="143" text-anchor="middle" font-size="68" fill="#fff">10</text>
+          </svg>
         </div>
         <span class="chip chip-1" aria-hidden="true"><svg><use href="#i-store"/></svg>3 lojas em Campinas</span>
       </div>
