@@ -134,21 +134,18 @@
     .art { grid-area: art; position: relative; width: min(340px, 78%); margin-inline: auto; aspect-ratio: 1; animation: pop .9s var(--ease) .25s both; }
     @media (min-width: 960px) { .art { width: min(430px, 86%); } }
     @keyframes pop { 0% { opacity: 0; transform: scale(.7) rotate(-8deg); } 70% { opacity: 1; transform: scale(1.04) rotate(1deg); } }
-    .art::before { content: ""; position: absolute; inset: 4%; border-radius: 50%; background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, .42), rgba(255, 255, 255, .08) 62%); border: 1px solid rgba(255, 255, 255, .4); }
-    .art::after { content: ""; position: absolute; inset: -5%; border-radius: 50%; border: 1px dashed rgba(255, 255, 255, .4); animation: spin 40s linear infinite; }
-    .lip { position: relative; z-index: 1; width: 100%; height: 100%; filter: drop-shadow(0 28px 26px rgba(36, 7, 26, .38)); animation: float 6s ease-in-out infinite; }
+    /* Cartão de vidro atrás da foto e contorno tracejado, levemente girados */
+    .art::before { content: ""; position: absolute; inset: 0; border-radius: 30px; background: linear-gradient(150deg, rgba(255, 255, 255, .42), rgba(255, 255, 255, .08)); border: 1px solid rgba(255, 255, 255, .45); rotate: 6deg; }
+    .art::after { content: ""; position: absolute; inset: -6%; border-radius: 40px; border: 1px dashed rgba(255, 255, 255, .45); rotate: -3deg; }
+    .shop { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 26px; border: 6px solid #fff; background: var(--pink-600); rotate: -2deg; box-shadow: 0 30px 50px -18px rgba(36, 7, 26, .6); animation: float 6s ease-in-out infinite; }
     @keyframes float { 50% { transform: translateY(-10px); } }
-    .spark path { animation: twinkle 2.6s ease-in-out infinite; }
-    .spark path:nth-child(2) { animation-delay: .8s; }
-    .spark path:nth-child(3) { animation-delay: 1.5s; }
-    @keyframes twinkle { 50% { opacity: .2; } }
-    .sticker { position: absolute; z-index: 2; left: -5%; bottom: 3%; width: 36%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--plum); color: var(--blush); box-shadow: 0 18px 30px -10px rgba(36, 7, 26, .6); animation: pop .7s var(--ease) .8s both; }
+    .sticker { position: absolute; z-index: 2; left: -8%; top: -8%; width: 32%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--plum); color: var(--blush); box-shadow: 0 18px 30px -10px rgba(36, 7, 26, .6); animation: pop .7s var(--ease) .8s both; }
     .sticker svg { position: absolute; inset: 0; animation: spin 20s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .sticker b { font-family: var(--font-d); font-weight: 400; font-size: clamp(1.4rem, 5.2vw, 2.4rem); line-height: .9; text-align: center; color: #fff; }
     .chip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: .5rem; background: #fff; color: var(--ink); font-weight: 700; font-size: clamp(.74rem, 3.2vw, .85rem); padding: .55rem .95rem; border-radius: 999px; box-shadow: 0 14px 30px -10px rgba(36, 7, 26, .5); white-space: nowrap; }
     .chip svg { width: 1.1rem; height: 1.1rem; color: var(--pink-600); }
-    .chip-1 { top: 9%; right: -6%; animation: rise .6s var(--ease) 1.05s both, bob 5s 1.8s ease-in-out infinite; }
+    .chip-1 { bottom: 7%; right: -6%; animation: rise .6s var(--ease) 1.05s both, bob 5s 1.8s ease-in-out infinite; }
     @keyframes bob { 50% { transform: translateY(-7px); } }
 
     /* Faixa dupla em movimento */
@@ -344,38 +341,14 @@
         </div>
       </div>
 
-      <div class="art" aria-hidden="true">
-        <svg class="lip" viewBox="0 0 420 420">
-          <defs>
-            <linearGradient id="g-tube" x1="0" x2="1"><stop offset="0" stop-color="#454045"/><stop offset=".35" stop-color="#17131A"/><stop offset="1" stop-color="#050406"/></linearGradient>
-            <linearGradient id="g-metal" x1="0" x2="1"><stop offset="0" stop-color="#8F898C"/><stop offset=".28" stop-color="#FAF7F8"/><stop offset=".62" stop-color="#B9B2B6"/><stop offset="1" stop-color="#7B7478"/></linearGradient>
-            <linearGradient id="g-bullet" x1="0" x2="1"><stop offset="0" stop-color="#F23C70"/><stop offset=".5" stop-color="#D01848"/><stop offset="1" stop-color="#980B31"/></linearGradient>
-            <radialGradient id="g-puddle" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#FFC2D8"/><stop offset="1" stop-color="#FF8DB7"/></radialGradient>
-          </defs>
-          <path fill="url(#g-puddle)" d="M92 262c-20-46 16-92 62-88 28-50 104-52 134-6 44-10 82 32 64 76 30 28 12 82-30 84-14 42-72 54-104 24-38 24-94 2-96-42-26-6-40-30-30-48z"/>
-          <g transform="rotate(12 230 240)">
-            <rect x="190" y="232" width="84" height="134" rx="8" fill="url(#g-tube)"/>
-            <rect x="196" y="170" width="72" height="66" rx="4" fill="url(#g-metal)"/>
-            <rect x="196" y="222" width="72" height="5" fill="rgba(0,0,0,.14)"/>
-            <path fill="url(#g-bullet)" d="M206 170V100c0-10 5-17 14-22l38-22v114z"/>
-            <path fill="rgba(255,255,255,.28)" d="M214 166V104c0-6 3-10 8-13v75z"/>
-          </g>
-          <g transform="rotate(62 118 330)">
-            <rect x="78" y="282" width="80" height="100" rx="8" fill="url(#g-tube)"/>
-            <ellipse cx="118" cy="382" rx="40" ry="11" fill="#050406"/>
-            <ellipse cx="118" cy="382" rx="31" ry="7" fill="#2B262D"/>
-          </g>
-          <g class="spark" fill="#fff">
-            <path transform="translate(330 96) scale(1.5)" d="M0-10C1-3 3-1 10 0 3 1 1 3 0 10-1 3-3 1-10 0-3-1-1-3 0-10z"/>
-            <path transform="translate(84 130)" d="M0-10C1-3 3-1 10 0 3 1 1 3 0 10-1 3-3 1-10 0-3-1-1-3 0-10z"/>
-            <path transform="translate(352 300) scale(.8)" d="M0-10C1-3 3-1 10 0 3 1 1 3 0 10-1 3-3 1-10 0-3-1-1-3 0-10z"/>
-          </g>
-        </svg>
-        <div class="sticker">
+      <div class="art">
+        <!-- Foto do Instagram da loja; pessoa, legenda e cartaz removidos com IA (Nim) -->
+        <img class="shop" src="img/fachada-600.webp" srcset="img/fachada-600.webp 600w, img/fachada-900.webp 900w" sizes="(min-width: 960px) 430px, min(340px, 78vw)" width="600" height="600" alt="Fachada da Be Makes Tudo 10: letreiro rosa com batom e prateleiras de maquiagem na entrada" fetchpriority="high" decoding="async">
+        <div class="sticker" aria-hidden="true">
           <svg viewBox="0 0 200 200"><defs><path id="ring" d="M100 100m-77 0a77 77 0 1 1 154 0a77 77 0 1 1-154 0"/></defs><text font-family="Bebas Neue, Impact, sans-serif" font-size="20" letter-spacing="2" fill="currentColor"><textPath href="#ring" textLength="476">PREÇO FIXO • TUDO R$ 10 • PREÇO FIXO • TUDO R$ 10 •</textPath></text></svg>
           <b>R$<br>10</b>
         </div>
-        <span class="chip chip-1"><svg><use href="#i-store"/></svg>3 lojas em Campinas</span>
+        <span class="chip chip-1" aria-hidden="true"><svg><use href="#i-store"/></svg>3 lojas em Campinas</span>
       </div>
 
       <div class="stats up" style="--d:.4s">
