@@ -261,16 +261,33 @@
     /* Rodapé (folga embaixo para a barra do celular) */
     footer { background: radial-gradient(70% 60% at 50% 0%, rgba(230, 36, 127, .28), transparent 70%), var(--plum); color: #E9CFDB; padding: 3.5rem 0 7rem; font-size: .93rem; }
     @media (min-width: 860px) { footer { padding: 4rem 0 2.5rem; } }
+    /* Marca + redes à esquerda; cada loja num cartão com endereço, rota e contato juntos */
     .foot { display: grid; gap: 2.25rem; }
-    @media (min-width: 800px) { .foot { grid-template-columns: 1.3fr 1.2fr 1fr .8fr; gap: 2.5rem; } }
-    @media (max-width: 799px) { .foot { text-align: center; } }
+    @media (min-width: 960px) { .foot { grid-template-columns: 1fr 2.5fr; gap: 3rem; align-items: start; } }
+    .foot-brand { text-align: center; }
+    .foot-brand p, .foot-bar p { text-wrap: balance; }
+    @media (min-width: 960px) { .foot-brand { text-align: left; } }
     .brand-f { font-family: var(--font-d); font-size: 2.6rem; line-height: .95; color: var(--blush); margin-bottom: .75rem; }
-    .foot h4 { color: #fff; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .9rem; }
-    /* Mesmo espaço entre linhas com ou sem link; o link usa a folga da linha como área de toque */
-    .foot li { margin-bottom: .35rem; padding-block: .2rem; }
-    .foot a { display: inline-block; padding-block: .2rem; margin-block: -.2rem; text-decoration: none; transition: color .2s; }
-    .foot a:hover { color: var(--pink-200); }
-    .copy { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .14); text-align: center; font-size: .82rem; }
+    .social { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1.25rem; }
+    @media (min-width: 960px) { .social { justify-content: flex-start; } }
+    .soc { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; text-decoration: none; transition: background .2s, border-color .2s, translate .2s; }
+    .soc:hover { background: var(--pink); border-color: var(--pink); translate: 0 -2px; }
+    .soc svg { width: 20px; height: 20px; }
+    .soc-text { display: inline-flex; gap: .5rem; width: auto; padding: 0 1.15rem; border-radius: 999px; font-weight: 700; font-size: .88rem; }
+    .foot-stores { display: grid; gap: .9rem; }
+    @media (min-width: 640px) { .foot-stores { grid-template-columns: repeat(3, 1fr); } }
+    .foot-stores li { display: flex; flex-direction: column; align-items: center; gap: .3rem; text-align: center; padding: 1.25rem; border-radius: var(--r-md); background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); }
+    @media (min-width: 640px) { .foot-stores li { align-items: flex-start; text-align: left; } }
+    .foot-stores small { color: var(--pink-200); font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .foot-stores p { color: #fff; line-height: 1.5; margin-bottom: .35rem; }
+    .foot-stores a { display: inline-flex; align-items: center; gap: .45rem; padding-block: .25rem; color: #E9CFDB; text-decoration: none; transition: color .2s; }
+    .foot-stores a:hover { color: var(--pink-200); }
+    .foot-stores a svg { width: 1rem; height: 1rem; flex: none; color: var(--pink-300); }
+    .foot-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .75rem 1.5rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .14); text-align: center; font-size: .82rem; }
+    @media (min-width: 640px) { .foot-bar { justify-content: space-between; text-align: left; } }
+    .to-top { display: inline-flex; align-items: center; gap: .45rem; padding: .45rem 1rem; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .2); color: #fff; font-weight: 700; text-decoration: none; transition: background .2s; }
+    .to-top:hover { background: rgba(255, 255, 255, .1); }
+    .to-top svg { width: 1rem; height: 1rem; rotate: -90deg; }
 
     /* Barra de atalhos do celular */
     .tabbar { position: fixed; z-index: 60; left: .75rem; right: .75rem; bottom: calc(.6rem + env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(4, 1fr); gap: .25rem; padding: .35rem; border-radius: 22px; background: rgba(255, 255, 255, .95); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 16px 34px -12px rgba(36, 7, 26, .55), 0 0 0 1px var(--line); animation: barIn .7s var(--ease) .9s both; }
@@ -480,35 +497,40 @@
   <footer>
     <div class="wrap">
       <div class="foot">
-        <div>
+        <div class="foot-brand">
           <p class="brand-f">Be Makes<br>Tudo 10</p>
-          <p>Loja de maquiagem a preço fixo.<br>3 lojas físicas em Campinas/SP.</p>
+          <p>Loja de maquiagem a preço fixo.<br>Tudo R$&nbsp;10,00 em 3 lojas físicas em Campinas/SP.</p>
+          <div class="social">
+            <a class="soc" href="https://www.instagram.com/bemakes_tudo10/" target="_blank" rel="noopener" aria-label="Instagram @bemakes_tudo10"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+            <a class="soc" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener" aria-label="WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+            <a class="soc soc-text" href="https://bemakestudo103.lojavirtualnuvem.com.br/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-bag"/></svg>Loja virtual</a>
+          </div>
         </div>
-        <div>
-          <h4>Lojas físicas</h4>
-          <ul>
-            <li>Av. Ruy Rodriguez, 4452 · Ouro Verde</li>
-            <li>Av. Dr. Moraes Salles, 416 · Centro</li>
-            <li>Rua Ibrantina Cardona, 741 · Ouro Verde</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Atendimento</h4>
-          <ul>
-            <li><a href="https://wa.me/5519992494551" target="_blank" rel="noopener">Loja 1 · (19) 99249-4551</a></li>
-            <li><a href="https://wa.me/5519989757098" target="_blank" rel="noopener">Loja 2 · (19) 98975-7098</a></li>
-            <li><a href="https://ig.me/m/bemakes_tudo10" target="_blank" rel="noopener">Loja 3 · Direct</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Online</h4>
-          <ul>
-            <li><a href="https://bemakestudo103.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Loja virtual</a></li>
-            <li><a href="https://www.instagram.com/bemakes_tudo10/" target="_blank" rel="noopener">Instagram</a></li>
-          </ul>
-        </div>
+        <ul class="foot-stores">
+          <li>
+            <small>Loja 1 · Ouro Verde</small>
+            <p>Av. Ruy Rodriguez, 4452<br>Ouro Verde, Campinas/SP</p>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Ruy%20Rodriguez%2C%204452%2C%20Campinas%20SP" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar</a>
+            <a href="https://wa.me/5519992494551?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>(19) 99249-4551</a>
+          </li>
+          <li>
+            <small>Loja 2 · Centro</small>
+            <p>Av. Dr. Moraes Salles, 416<br>Centro, Campinas/SP</p>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Dr.%20Moraes%20Salles%2C%20416%2C%20Campinas%20SP" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar</a>
+            <a href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>(19) 98975-7098</a>
+          </li>
+          <li>
+            <small>Loja 3 · Ouro Verde</small>
+            <p>Rua Ibrantina Cardona, 741<br>Ouro Verde, Campinas/SP</p>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Ibrantina%20Cardona%2C%20741%2C%20Ouro%20Verde%2C%20Campinas%20SP%2C%2013054-430" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar</a>
+            <a href="https://ig.me/m/bemakes_tudo10" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg>Direct no Instagram</a>
+          </li>
+        </ul>
       </div>
-      <p class="copy">© 2026 Be Makes Tudo 10. Todos os direitos reservados.</p>
+      <div class="foot-bar">
+        <p>© 2026 Be Makes Tudo 10. Todos os direitos reservados.</p>
+        <a class="to-top" href="#topo">Voltar ao topo<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
     </div>
   </footer>
 
