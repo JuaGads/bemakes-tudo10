@@ -118,13 +118,14 @@
     h1 .big { display: block; font-family: var(--font-d); font-size: clamp(4.8rem, 16vw, 9.5rem); line-height: .88; letter-spacing: .01em; text-shadow: 0 5px 0 var(--pink-700), 0 20px 30px rgba(36, 7, 26, .3); }
     h1 .big em { display: inline-block; font-style: normal; color: var(--blush); animation: tada 5s 2s ease-in-out infinite; }
     @keyframes tada { 0%, 86%, 100% { transform: none; } 90% { transform: rotate(-3deg) scale(1.06); } 94% { transform: rotate(3deg) scale(1.06); } 97% { transform: rotate(-2deg) scale(1.03); } }
-    .sub { font-size: 1.08rem; max-width: 33rem; line-height: 1.65; }
+    .sub { font-size: 1.08rem; max-width: 33rem; line-height: 1.65; text-wrap: pretty; }
     .hero-cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.6rem; }
     .hero-cta .btn { flex: 1 1 auto; padding-inline: .8rem; font-size: .95rem; }
     @media (min-width: 360px) { .hero-cta { flex-wrap: nowrap; } } /* lado a lado no celular; abaixo de 360px empilha */
     @media (min-width: 600px) { .hero-cta .btn { flex: 0 0 auto; padding-inline: 1.6rem; font-size: 1rem; } }
-    .stats { grid-area: stats; display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; max-width: 20rem; }
-    @media (min-width: 960px) { .stats { align-self: start; } }
+    /* Numa coluna ocupa a largura toda, alinhado com a foto centralizada; em duas colunas fica sob o texto */
+    .stats { grid-area: stats; display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+    @media (min-width: 960px) { .stats { align-self: start; max-width: 20rem; } }
     .stat { text-align: center; padding: .8rem .3rem; border-radius: 16px; background: rgba(255, 255, 255, .13); border: 1px solid rgba(255, 255, 255, .28); }
     .stat b { display: block; font-family: var(--font-d); font-weight: 400; font-size: clamp(1.6rem, 7.2vw, 2.4rem); line-height: 1; white-space: nowrap; }
     .stat > span { display: block; margin-top: .15rem; font-size: .8rem; }
@@ -163,12 +164,12 @@
     .head { margin-bottom: 2.5rem; }
     .head.center { text-align: center; }
     .kicker { font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--pink-600); }
-    .h2 { font-family: var(--font-d); font-weight: 400; font-size: clamp(2.7rem, 7vw, 4.2rem); line-height: .95; color: var(--plum); margin: .4rem 0 .9rem; }
+    .h2 { font-family: var(--font-d); font-weight: 400; font-size: clamp(2.7rem, 7vw, 4.2rem); line-height: .95; color: var(--plum); margin: .4rem 0 .9rem; text-wrap: balance; }
     .h2 em { position: relative; font-family: var(--font-s); font-size: .86em; color: var(--pink-600); white-space: nowrap; }
     /* Rabisco que se desenha embaixo da palavra em destaque */
     .h2 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.14em; height: .2em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8c18-7 30 5 48 0s30-6 48-1 14 2 20 0' fill='none' stroke='%23E6247F' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%; clip-path: inset(0); transition: clip-path .9s var(--ease) .35s; }
     .js .reveal:not(.in) .h2 em::after { clip-path: inset(0 100% 0 0); }
-    .lead { color: var(--muted); max-width: 38rem; font-size: 1.05rem; }
+    .lead { color: var(--muted); max-width: 38rem; font-size: 1.05rem; text-wrap: balance; }
     .center .lead { margin-inline: auto; }
 
     /* Faixa da loja online: secundária, a loja física vem primeiro */
@@ -180,7 +181,7 @@
     .ico { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; background: var(--blush); color: var(--pink-600); }
     .ico svg { width: 28px; height: 28px; }
     .way-online .ico { background: rgba(255, 255, 255, .12); color: var(--pink-200); }
-    .way h3 { font-family: var(--font-d); font-weight: 400; font-size: 2.5rem; line-height: 1; color: var(--plum); }
+    .way h3 { font-family: var(--font-d); font-weight: 400; font-size: 2.5rem; line-height: 1; color: var(--plum); text-wrap: balance; }
     .way-online h3 { color: #fff; }
     .way p { color: var(--muted); }
     .way-online p { color: #F3D9E4; }
@@ -192,7 +193,8 @@
     @media (min-width: 860px) { .way { flex-direction: row; align-items: center; justify-content: space-between; gap: 2.5rem; } .way .btns { flex: none; margin-top: 0; padding-top: 0; } }
 
     /* Categorias: carrossel de arrastar no celular, grade no desktop */
-    .products { position: relative; overflow: hidden; background: #fff; }
+    /* Embaixo, folga igual à da faixa online, para não abrir um vão entre as duas */
+    .products { position: relative; overflow: hidden; background: #fff; padding-bottom: clamp(2.5rem, 6vw, 4rem); }
     /* Duas manchas rosadas nos cantos */
     .products::before, .products::after { content: ""; position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(251, 192, 214, .6), transparent 68%); pointer-events: none; }
     .products::before { width: 520px; height: 520px; left: -220px; top: -120px; }
@@ -221,17 +223,20 @@
     .perks li::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--pink); }
     .grid3 { display: grid; gap: 1.25rem; }
     @media (min-width: 900px) { .grid3 { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
-    .store { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-lg); border: 1px solid var(--line); background: #fff; }
+    .store { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-lg); border: 1px solid var(--line); background: #fff; container-type: inline-size; }
     .store:hover { border-color: var(--pink-300); box-shadow: var(--shadow); translate: 0 -4px; }
     .store-top { position: relative; overflow: hidden; padding: 1.4rem 1.6rem; color: #fff; background: linear-gradient(135deg, var(--pink), var(--pink-600)); }
-    .store-top::after { content: attr(data-n); position: absolute; right: .75rem; bottom: -1.7rem; font-family: var(--font-d); font-size: 7rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, .4); }
+    /* Número e título crescem com a largura do cartão (cqi), para o nome da rua nunca encostar no número */
+    .store-top::after { content: attr(data-n); position: absolute; right: .75rem; bottom: -.25em; font-family: var(--font-d); font-size: 5.6rem; font-size: clamp(4.5rem, 24cqi, 5.6rem); line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, .4); }
+    .store-top small, .store-top h3 { position: relative; z-index: 1; }
     .store-top small { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-    .store-top h3 { font-family: var(--font-d); font-weight: 400; font-size: 2.1rem; line-height: 1; }
+    .store-top h3 { font-family: var(--font-d); font-weight: 400; font-size: 2rem; font-size: clamp(1.6rem, 9cqi, 2rem); line-height: 1; }
     .store-body { flex: 1; display: flex; flex-direction: column; gap: 1.1rem; padding: 1.4rem 1.6rem 1.6rem; }
     .addr { display: flex; gap: .6rem; }
     .addr svg { width: 1.25rem; height: 1.25rem; flex: none; margin-top: .15rem; color: var(--pink-600); }
-    .store .btns { margin-top: auto; display: flex; flex-wrap: wrap; gap: .6rem; }
-    .store .btn { flex: 1 1 auto; padding: .85rem 1rem; font-size: .92rem; }
+    /* Dois botões de mesma largura; se não couberem lado a lado, os dois empilham (igual nos 3 cartões) */
+    .store .btns { margin-top: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: .6rem; }
+    .store .btn { padding: .85rem 1rem; font-size: .92rem; }
 
     /* Instagram */
     .insta { position: relative; overflow: hidden; text-align: center; color: #fff; background: linear-gradient(135deg, #E6247F, #B8105E); }
@@ -252,8 +257,9 @@
     @media (min-width: 800px) { .foot { grid-template-columns: 1.3fr 1.2fr 1fr .8fr; gap: 2.5rem; } }
     .brand-f { font-family: var(--font-d); font-size: 2.6rem; line-height: .95; color: var(--blush); margin-bottom: .75rem; }
     .foot h4 { color: #fff; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .9rem; }
-    .foot li { margin-bottom: .55rem; }
-    .foot a { display: inline-block; padding: .2rem 0; text-decoration: none; transition: color .2s; }
+    /* Mesmo espaço entre linhas com ou sem link; o link usa a folga da linha como área de toque */
+    .foot li { margin-bottom: .35rem; padding-block: .2rem; }
+    .foot a { display: inline-block; padding-block: .2rem; margin-block: -.2rem; text-decoration: none; transition: color .2s; }
     .foot a:hover { color: var(--pink-200); }
     .copy { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .14); text-align: center; font-size: .82rem; }
 
@@ -373,7 +379,7 @@
       <div class="head center reveal">
         <span class="kicker">Lojas físicas</span>
         <h2 class="h2">Venha nos <em>visitar</em></h2>
-        <p class="lead">Três lojas em Campinas, duas no Ouro Verde e uma no Centro, com tudo a R$ 10,00.</p>
+        <p class="lead">Três lojas em Campinas, duas no Ouro Verde e uma no Centro, com tudo a R$&nbsp;10,00.</p>
         <ul class="perks">
           <li>Veja de perto</li>
           <li>Leve na hora</li>
