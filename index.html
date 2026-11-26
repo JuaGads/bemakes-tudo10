@@ -48,6 +48,8 @@
     a:focus-visible { outline: 3px solid var(--plum); outline-offset: 3px; border-radius: 6px; }
     .hero a:focus-visible, .insta a:focus-visible, footer a:focus-visible, .way-online a:focus-visible { outline-color: #fff; }
     ul { list-style: none; }
+    /* Imagens não arrastam nem mostram "salvar imagem": o clique/toque passa para o link ou caixa em volta */
+    img { pointer-events: none; -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
     .wrap { width: min(1160px, 100% - 2.5rem); margin-inline: auto; }
     section { padding: clamp(3.5rem, 9vw, 6.5rem) 0; scroll-margin-top: 1rem; }
     @media (min-width: 860px) { section { scroll-margin-top: 4.5rem; } }
@@ -231,6 +233,11 @@
     .perks li { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .95rem; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-weight: 700; font-size: .88rem; color: var(--plum); }
     .perks li::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--pink); }
     .grid3 { display: grid; gap: 1.25rem; }
+    /* Tablet: 2 colunas e o 3º cartão centralizado embaixo, em vez de 1 coluna esticada */
+    @media (min-width: 640px) and (max-width: 899px) {
+      .grid3 { grid-template-columns: 1fr 1fr; }
+      .grid3 > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - .625rem); }
+    }
     @media (min-width: 900px) { .grid3 { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
     .store { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-lg); border: 1px solid var(--line); background: #fff; container-type: inline-size; }
     .store:hover { border-color: var(--pink-300); box-shadow: var(--shadow); translate: 0 -4px; }
@@ -524,6 +531,15 @@
   <a class="fab" href="https://wa.me/5519989757098?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
   <script>
+    // Proteção contra cópia: sem botão direito, sem arrastar e sem atalhos de salvar, imprimir ou ver o código.
+    // shortcut: só barra o visitante comum; print de tela e o menu do próprio navegador continuam, numa página pública não há como impedir.
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      const c = e.code, mod = e.ctrlKey || e.metaKey;
+      if (c === 'F12' || (mod && ['KeyS', 'KeyU', 'KeyP'].includes(c)) || (mod && (e.shiftKey || e.altKey) && ['KeyI', 'KeyJ', 'KeyC'].includes(c))) e.preventDefault();
+    });
+
     // Revela os blocos ao rolar; sem JS o conteúdo fica visível (classe .js).
     const io = new IntersectionObserver(es => es.forEach(e => {
       if (!e.isIntersecting) return;
@@ -550,7 +566,8 @@
         setTimeout(() => {
           const t0 = performance.now();
           const tick = now => {
-            const p = Math.min((now - t0) / dur, 1);
+            // o horário do quadro pode vir antes de t0; sem o max(0) a conta dava número negativo
+            const p = Math.min(Math.max((now - t0) / dur, 0), 1);
             el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
             if (p < 1) requestAnimationFrame(tick);
           };
